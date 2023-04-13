@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-logo">
+        <img src="logo.png" alt="Cloud Office Logo" />
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Main</a></li>
+          <li><a href="document.html">Document Management</a></li>
+          <li><a href="server.html">Server Management</a></li>
+          <li><a href="data.html">Data Management</a></li>
+          <li><a href="sns.html">SNS</a></li>
+        </ul>
+      </nav>
+      <div class="header-login">
+        <a href="membership.html">Login</a>
+      </div>
+    </header>
+    <main>
+      <div class="hero-section">
+        <h1>Welcome to our Cloud Document Management System</h1>
+        <p>
+          Use the navigation menu to access different features of the system.
+        </p>
+        <a href="#" class="cta-button">Get Started</a>
+      </div>
+      <div class="features-section">
+        <h2>Why Choose Our System?</h2>
+        <div class="feature-item">
+          <img src="document-icon.png" alt="Document Management Icon" />
+          <h3>Efficient Document Management</h3>
+          <p>
+            Our system allows you to easily upload, organize, and share your
+            documents with team members or clients, saving you time and
+            increasing productivity.
+          </p>
+        </div>
+        <div class="feature-item">
+          <img src="security-icon.png" alt="Security Icon" />
+          <h3>Secure and Reliable</h3>
+          <p>
+            With our state-of-the-art security features and reliable cloud
+            infrastructure, you can trust that your sensitive documents are
+            always safe and accessible.
+          </p>
+        </div>
+        <div class="feature-item">
+          <img src="support-icon.png" alt="Support Icon" />
+          <h3>Dedicated Support</h3>
+          <p>
+            Our team of experts is available 24/7 to answer any questions or
+            concerns you may have, and to provide personalized support to help
+            you get the most out of our system.
+          </p>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2023 My Cloud Docs</p>
+    </footer>
+  </body>
+</html>
+
+<script>
+  window.addEventListener('scroll', function () {
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', window.scrollY > 0);
+  });
+</script>

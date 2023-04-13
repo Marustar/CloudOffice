@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document Management</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+</head>
+<body>
+<header class="header">
+    <div class="header-logo">
+        <img src="logo.png" alt="Cloud Office Logo"/>
+    </div>
+    <nav class="header-nav">
+        <ul>
+            <li><a href="index.html">Main</a></li>
+            <li><a href="document.html">Document Management</a></li>
+            <li><a href="server.html">Server Management</a></li>
+            <li><a href="data.html">Data Management</a></li>
+            <li><a href="sns.html">SNS</a></li>
+        </ul>
+    </nav>
+    <div class="header-login">
+        <a href="membership.html">Login</a>
+    </div>
+</header>
+<main>
+    <h1>Document Management</h1>
+    <div class="document-boxes">
+        <div class="document-box">
+            <iframe src="https://view.officeapps.live.com/op/embed.aspx?src={% static 'testcase.pptx' %}" width="800" height="600"></iframe>
+        </div>
+        <!-- more document boxes here -->
+    </div>
+    <div class="settings">
+        <h2>Settings</h2>
+        <button class="trash-button">Trash</button>
+        <button class="form-storage-button">Form Storage</button>
+    </div>
+</main>
+<script src="script.js"></script>
+<footer>
+    <p>&copy; 2023 My Cloud Docs</p>
+</footer>
+</body>
+</html>
