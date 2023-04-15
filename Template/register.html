@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Register</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Register</button>
+</form>
+<p>이미 계정을 가지고 있습니까? <a href="{% url 'login' %}">Login</a></p>
+{% endblock %}
