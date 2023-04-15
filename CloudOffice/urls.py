@@ -20,4 +20,5 @@ from CloudOffice import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('viewer_ppt/', views.ppt_viewer, name='viewer_ppt'),
+    path('api/auth/', include('authentication.urls')), 
 ]
