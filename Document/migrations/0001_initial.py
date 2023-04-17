@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('User', '0001_initial'),
+        ('Emp', '0001_initial'),
     ]
 
     operations = [
@@ -28,10 +28,10 @@ class Migration(migrations.Migration):
                 ('Doc_Title', models.CharField(max_length=50)),
                 ('Doc_Type', models.IntegerField()),
                 ('Doc_State', models.IntegerField()),
-                ('Doc_Dept', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='User.departments')),
+                ('Doc_Dept', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Emp.departments')),
                 ('Doc_Files', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='Document.files')),
-                ('Doc_Reciever', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='Doc_Reciever', to='User.users')),
-                ('Doc_Sender', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='Doc_Sender', to='User.users')),
+                ('Doc_Reciever', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='Doc_Reciever', to='Emp.Employee')),
+                ('Doc_Sender', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='Doc_Sender', to='Emp.Employee')),
             ],
         ),
     ]

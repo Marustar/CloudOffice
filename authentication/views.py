@@ -3,8 +3,9 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.views import LoginView as DjangoLoginView, LogoutView as DjangoLogoutView
+from django.views import View
 
-class LoginView(DjangoLoginView): 
+class LoginView(DjangoLoginView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request):

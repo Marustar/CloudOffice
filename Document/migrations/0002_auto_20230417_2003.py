@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('User', '0001_initial'),
+        ('Emp', '0001_initial'),
         ('Document', '0001_initial'),
     ]
 

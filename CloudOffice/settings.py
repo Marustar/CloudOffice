@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication', # authentication 연결
-    'User',
     'Document',
-    
+    'Emp',
+    'Board',
+    'Certification',
+    'Mail',
 ]
 
 MIDDLEWARE = [
