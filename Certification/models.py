@@ -9,7 +9,7 @@ class Certification(models.Model):
     Cert_Path = models.CharField(max_length=100)
 
 class CertLog(models.Model):
-    CLog_Time = models.DateField(default=timezone.now())
+    CLog_Time = models.DateTimeField()
     CLog_User = models.ForeignKey(Employee, on_delete=models.CASCADE)
     CLog_Docs = models.ForeignKey(Document, on_delete = models.CASCADE)
     
