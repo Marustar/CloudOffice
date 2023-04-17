@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Management</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-logo">
+        <a href="index.html"><img src="logo.png" alt="Cloud Office Logo" /></a>
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">메인</a></li>
+          <li><a href="document.html">문서 관리</a></li>
+          <li><a href="mail.html">메일함</a></li>
+          <li><a href="data.html">데이터 관리</a></li>
+          <li><a href="server.html">서버 관리</a></li>
+          <li><a href="sns.html">SNS</a></li>
+        </ul>
+      </nav>
+      <div class="header-login">
+        <a href="membership.html">Login</a>
+      </div>
+    </header>
+    <main class="approval">
+      <h1>문서 승인</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>문서명</th>
+            <th>상태</th>
+            <th>승인자</th>
+            <th>직급</th>
+            <th>서명</th>
+            <th>이름</th>
+            <th>코맨트</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>문서 1</td>
+            <td class="status-pending">Pending</td>
+            <td>John Doe</td>
+            <td>부장</td>
+            <td><img src="signature.png" alt="Signature" /></td>
+            <td><input type="text" name="name" placeholder="Name" /></td>
+            <td><input type="text" name="comment" placeholder="Comment" /></td>
+          </tr>
+          <tr>
+            <td>문서 2</td>
+            <td class="status-approved">Approved</td>
+            <td>Jane Smith</td>
+            <td>과장</td>
+            <td><img src="signature.png" alt="Signature" /></td>
+            <td><input type="text" name="name" placeholder="Name" /></td>
+            <td><input type="text" name="comment" placeholder="Comment" /></td>
+          </tr>
+          <tr>
+            <td>문서 3</td>
+            <td class="status-rejected">Rejected</td>
+            <td>Mike Johnson</td>
+            <td>대리</td>
+            <td><img src="signature.png" alt="Signature" /></td>
+            <td><input type="text" name="name" placeholder="Name" /></td>
+            <td><input type="text" name="comment" placeholder="Comment" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <script src="script.js"></script>
+    <footer>
+      <p>&copy; 2023 My Cloud Docs</p>
+    </footer>
+  </body>
+</html>

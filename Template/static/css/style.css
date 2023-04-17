@@ -315,7 +315,7 @@ footer {
   color: #999;
 }
 
-/* Membership page styles */
+/* sign in page styles */
 
 .login {
   max-width: 600px;
@@ -369,6 +369,55 @@ button[type='submit']:hover {
   font-weight: 500;
   margin-top: 20px;
   color: #0077cc;
+}
+
+.signup {
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.signup h2 {
+  margin-top: 0;
+}
+
+.signup form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup .form-group {
+  margin-bottom: 1rem;
+}
+
+.signup label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.signup input[type='text'],
+.signup input[type='email'],
+.signup input[type='password'] {
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.signup button[type='submit'] {
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: none;
+  background-color: #0077cc;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.signup button[type='submit']:hover {
+  background-color: #0066b2;
 }
 
 /* Document management page styles */
@@ -964,14 +1013,317 @@ footer p {
     font-size: 16px;
     margin-bottom: 20px;
   }
-  
+
   .header-logo {
     display: flex;
     align-items: center;
   }
-  
+
   .header-logo img {
     height: 40px;
     margin-right: 10px;
   }
-  
+}
+
+.inbox,
+.sent-documents,
+.writing-document,
+.viewing-details,
+.waiting-documents {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.inbox h2,
+.sent-documents h2,
+.writing-document h2,
+.viewing-details h2,
+.waiting-documents h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.inbox p,
+.sent-documents p,
+.writing-document p,
+.viewing-details p,
+.waiting-documents p {
+  font-size: 16px;
+}
+
+/* sent document */
+
+.document-details {
+  margin-bottom: 30px;
+}
+
+.approval-status table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.approval-status th,
+.approval-status td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.approval-status th {
+  font-weight: bold;
+}
+
+.approval-status tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.approval-status input[type='text'],
+.approval-status textarea {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.approval-status textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* docu manage */
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 5px 0;
+}
+
+.sidebar a {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  color: #000;
+  text-align: left;
+}
+
+.sidebar a:hover {
+  background-color: #eee;
+}
+
+.content {
+  flex: 1;
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.search select,
+.search input[type='text'],
+.search input[type='date'] {
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search button[type='submit'] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+table th {
+  background-color: #f5f5f5;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination span {
+  margin-right: 10px;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  color: #333;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  background-color: #ddd;
+}
+
+/* Table styles */
+.approval table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.approval th,
+.approval td {
+  border: none;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.approval th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.approval td:first-child {
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+}
+
+.approval td:nth-child(2) {
+  font-weight: bold;
+}
+
+/* Approval status styles */
+.approval td:nth-child(2).status-pending {
+  color: #f39c12;
+}
+
+.approval td:nth-child(2).status-approved {
+  color: #2ecc71;
+}
+
+.approval td:nth-child(2).status-rejected {
+  color: #e74c3c;
+}
+
+/* Signature styles */
+.approval td:nth-child(5) {
+  position: relative;
+  height: 80px;
+}
+
+.approval td:nth-child(5) img {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Input styles */
+.approval td:last-child input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease-in-out;
+}
+
+.approval td:last-child input:focus {
+  outline: none;
+  border: 1px solid #3498db;
+  box-shadow: 0 0 3px #3498db;
+}
+
+.approval td:last-child input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+/* Submit button styles */
+.approval td:last-child input[type='submit'] {
+  margin-top: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.approval td:last-child input[type='submit']:hover {
+  background-color: #2980b9;
+}
+
+/* Media query for small screens */
+@media screen and (max-width: 600px) {
+  .mail-sidebar {
+    width: 100%;
+  }
+
+  .mail-content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .mail-write {
+    margin-top: 20px;
+  }
+
+  .approval td:last-child input[type='submit'] {
+    font-size: 14px;
+    padding: 6px;
+  }
+}

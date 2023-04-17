@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Management</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-logo">
+        <a href="index.html"><img src="logo.png" alt="Cloud Office Logo" /></a>
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">메인</a></li>
+          <li><a href="document.html">문서 관리</a></li>
+          <li><a href="mail.html">메일함</a></li>
+          <li><a href="data.html">데이터 관리</a></li>
+          <li><a href="server.html">서버 관리</a></li>
+          <li><a href="sns.html">SNS</a></li>
+        </ul>
+      </nav>
+      <div class="header-login">
+        <a href="sign in.html">Login</a>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <div class="sidebar">
+          <ul>
+            <li><a href="#">새 결재 진행</a></li>
+            <li><a href="#">결재 대기중 문서</a></li>
+            <li><a href="#">결재 완료 문서</a></li>
+            <li><a href="approval.html">임시 저장 문서</a></li>
+            <li><a href="#">보낸 문서함</a></li>
+            <li><a href="#">받은 문서함</a></li>
+            <li><a href="sent.html">문서 결재해버리기 야발~~</a></li>
+          </ul>
+        </div>
+        <div class="content">
+          <div class="search">
+            <select name="search-classification">
+              <option value="">Classification</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            <input type="text" name="search-box" placeholder="Search" />
+            <input type="date" name="search-date" />
+            <button type="submit">Search</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>문서 번호</th>
+                <th>보고일자</th>
+                <th>문서명</th>
+                <th>수신(발신)부서</th>
+                <th>보고자</th>
+                <th>검토자</th>
+                <th>결재여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>DOC-001</td>
+                <td>2023-04-15</td>
+                <td>Example Document 1</td>
+                <td>Marketing</td>
+                <td>John Doe</td>
+                <td>Jane Smith</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>DOC-002</td>
+                <td>2023-04-14</td>
+                <td>Example Document 2</td>
+                <td>Sales</td>
+                <td>Jane Smith</td>
+                <td>Mark Lee</td>
+                <td>Approved</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>DOC-003</td>
+                <td>2023-04-13</td>
+                <td>Example Document 3</td>
+                <td>Human Resources</td>
+                <td>Mark Lee</td>
+                <td>John Doe</td>
+                <td>Rejected</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span>Page 1 of 3</span>
+            <a href="#">Previous</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">Next</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2023 My Cloud Docs</p>
+    </footer>
+  </body>
+</html>
