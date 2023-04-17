@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from CloudOffice import views
+from .views import pdfView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('viewer_ppt/', views.ppt_viewer, name='viewer_ppt'),
-    path('api/auth/', include('authentication.urls')), 
+    path('pdf/', pdfView, name='pdfView'),
+    path('api/auth/', include('authentication.urls')),
 ]

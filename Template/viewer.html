@@ -29,7 +29,7 @@
     <h1>Document Management</h1>
     <div class="document-boxes">
         <div class="document-box">
-            <iframe src="https://view.officeapps.live.com/op/embed.aspx?src={% static 'testcase.pptx' %}" width="800" height="600"></iframe>
+            <embed src="{% url 'pdfView' %}" type="application/pdf" />
         </div>
         <!-- more document boxes here -->
     </div>
