@@ -1,80 +1,50 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    {% load static %}
-    <title>Data Management</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <header class="header">
-      <div class="header-logo">
-        <a href="index.html"><img src="logo.png" alt="Cloud Office Logo" /></a>
-      </div>
-      <nav class="header-nav">
-        <ul>
-          <li><a href="index.html">메인</a></li>
-          <li><a href="document.html">문서 관리</a></li>
-          <li><a href="mail.html">메일함</a></li>
-          <li><a href="data.html">데이터 관리</a></li>
-          <li><a href="server.html">서버 관리</a></li>
-          <li><a href="sns.html">SNS</a></li>
-        </ul>
-      </nav>
-      <div class="header-login">
-        <a href="sign in.html">Login</a>
-      </div>
-    </header>
-    <main>
-      <h1>Data Management</h1>
-      <div id="filter">
-        <input type="text" id="filter-input" placeholder="Filter by..." />
-        <button id="filter-button">Filter</button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>001</td>
-            <td>John Doe</td>
-            <td>johndoe@example.com</td>
-            <td>555-1234</td>
-            <td>123 Main St, Anytown USA</td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>Jane Smith</td>
-            <td>janesmith@example.com</td>
-            <td>555-5678</td>
-            <td>456 Oak Ave, Anytown USA</td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>Bob Johnson</td>
-            <td>bjohnson@example.com</td>
-            <td>555-9012</td>
-            <td>789 Maple Blvd, Anytown USA</td>
-          </tr>
-          <tr>
-            <td>004</td>
-            <td>Susan Lee</td>
-            <td>susanlee@example.com</td>
-            <td>555-3456</td>
-            <td>246 Elm St, Anytown USA</td>
-          </tr>
-        </tbody>
-      </table>
-    </main>
-    <footer>
-      <p>&copy; 2023 My Cloud Docs</p>
-    </footer>
-  </body>
-</html>
+{% extends 'base.html' %}{% load static %}{% block content %}
+<main>
+  <h1>Data Management</h1>
+  <div id="filter">
+    <input type="text" id="filter-input" placeholder="Filter by..." />
+    <button id="filter-button">Filter</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>001</td>
+        <td>John Doe</td>
+        <td>johndoe@example.com</td>
+        <td>555-1234</td>
+        <td>123 Main St, Anytown USA</td>
+      </tr>
+      <tr>
+        <td>002</td>
+        <td>Jane Smith</td>
+        <td>janesmith@example.com</td>
+        <td>555-5678</td>
+        <td>456 Oak Ave, Anytown USA</td>
+      </tr>
+      <tr>
+        <td>003</td>
+        <td>Bob Johnson</td>
+        <td>bjohnson@example.com</td>
+        <td>555-9012</td>
+        <td>789 Maple Blvd, Anytown USA</td>
+      </tr>
+      <tr>
+        <td>004</td>
+        <td>Susan Lee</td>
+        <td>susanlee@example.com</td>
+        <td>555-3456</td>
+        <td>246 Elm St, Anytown USA</td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+{% endblock %}

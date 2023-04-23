@@ -1,76 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    {% load static %}
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payment Approval</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="header-logo">
-        <a href="index.html"><img src="logo.png" alt="Cloud Office Logo" /></a>
-      </div>
-      <nav class="header-nav">
-        <ul>
-          <li><a href="index.html">메인</a></li>
-          <li><a href="document.html">문서 관리</a></li>
-          <li><a href="mail.html">메일함</a></li>
-          <li><a href="data.html">데이터 관리</a></li>
-          <li><a href="server.html">서버 관리</a></li>
-          <li><a href="sns.html">SNS</a></li>
-        </ul>
-      </nav>
-      <div class="header-login">
-        <a href="sign in.html">Login</a>
-      </div>
-    </header>
-    <main class="main">
-      <h1>문서 결재</h1>
-      <div class="document-details">
-        <h2>문서 세부정보</h2>
-        <ul>
-          <li><strong>문서명 :</strong> Example Document</li>
-          <li><strong>문서 ID:</strong> DOC-00123</li>
-          <li>
-            <strong>아니 왜 결재가 아니라 결제로 뜨는데 :</strong>
-            $50.00
-          </li>
-        </ul>
-      </div>
-      <div class="approval-status">
-        <h2>Approval Status</h2>
-        <table>
-          <tr>
-            <th>Position Level</th>
-            <th>Approval Status</th>
-            <th>Name</th>
-            <th>Comment</th>
-          </tr>
-          <tr>
-            <td>Manager</td>
-            <td>Pending</td>
-            <td><input type="text" name="manager-name" /></td>
-            <td><textarea name="manager-comment"></textarea></td>
-          </tr>
-          <tr>
-            <td>Director</td>
-            <td>Not Required</td>
-            <td>N/A</td>
-            <td>N/A</td>
-          </tr>
-          <tr>
-            <td>Executive</td>
-            <td>Not Required</td>
-            <td>N/A</td>
-            <td>N/A</td>
-          </tr>
-        </table>
-      </div>
-    </main>
-    <footer>
-      <p>&copy; 2023 My Cloud Docs</p>
-    </footer>
-  </body>
-</html>
+{% extends 'base.html' %}{% load static %}{% block content %}
+<main>
+  <h1>문서 결재</h1>
+  <div class="document-details">
+    <h2>문서 세부정보</h2>
+    <ul>
+      <li><strong>문서명 :</strong> Example Document</li>
+      <li><strong>문서 ID:</strong> DOC-00123</li>
+      <li>
+        <strong>아니 왜 결재가 아니라 결제로 뜨는데 :</strong>
+        $50.00
+      </li>
+    </ul>
+  </div>
+  <div class="approval-status">
+    <h2>Approval Status</h2>
+    <table>
+      <tr>
+        <th>Position Level</th>
+        <th>Approval Status</th>
+        <th>Name</th>
+        <th>Comment</th>
+      </tr>
+      <tr>
+        <td>Manager</td>
+        <td>Pending</td>
+        <td><input type="text" name="manager-name" /></td>
+        <td><textarea name="manager-comment"></textarea></td>
+      </tr>
+      <tr>
+        <td>Director</td>
+        <td>Not Required</td>
+        <td>N/A</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>Executive</td>
+        <td>Not Required</td>
+        <td>N/A</td>
+        <td>N/A</td>
+      </tr>
+    </table>
+  </div>
+</main>
+{% endblock %}

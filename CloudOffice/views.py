@@ -5,9 +5,44 @@ import os
 from django.http import HttpResponse
 import comtypes.client
 
+def home(request):
+    return render(request, 'signin.html')
+
+def index(request):
+    return render(request, 'index.html')
+
+def approval(request):
+    return render(request, 'approval.html')
+
+def data(request):
+    return render(request, 'data.html')
+
+def document(request):
+    return render(request, 'document.html')
+
+def mail(request):
+    return render(request, 'mail.html')
+
+def sent(request):
+    return render(request, 'sent.html')
+
+def server(request):
+    return render(request, 'server.html')
+
+def signin(request):
+    return render(request, 'signin.html')
+
+def signup(request):
+    return render(request, 'signup.html')
+
+def sns(request):
+    return render(request, 'sns.html')
 
 def viewer(request):
     return render(request, 'viewer.html')
+
+def popup(request):
+    return render(request, 'popup.html')
 
 
 def pdfView(request):

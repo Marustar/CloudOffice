@@ -228,9 +228,7 @@ body {
 }
 
 .container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 /* Header styles */
@@ -740,12 +738,13 @@ body {
 
 /* Header styles */
 header {
-  background-color: #dcd7d2;
+  background-color: #253761;
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  box-shadow: 0px 8px 8px -8px black;
 }
 
 header a {
@@ -755,6 +754,8 @@ header a {
 
 header a:hover {
   text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 3px;
 }
 
 header .menu {
@@ -843,9 +844,9 @@ header .menu a:hover {
 }
 
 main {
-  max-width: 1200px;
+  max-width: 95%;
   margin: 0 auto;
-  padding: 50px 20px;
+  padding: 50px 10px;
 }
 
 .hero-section {
@@ -955,7 +956,7 @@ main {
 /* Footer styles */
 
 footer {
-  background-color: #5f85db;
+  background-color: #253761;
   color: #fff;
   text-align: center;
   padding: 15px;
@@ -1326,4 +1327,227 @@ table tr:hover {
     font-size: 14px;
     padding: 6px;
   }
+}
+
+.main-left {
+  float: left;
+  width: 30%;
+  margin-right: 5%;
+  text-align: center;
+}
+
+.main-left h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.main-left img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-top: 20px;
+}
+
+/* Mailboxes styles */
+.mailboxes {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 20%;
+  margin-bottom: 20%;
+}
+
+.mailbox {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.mailbox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+}
+
+.mailbox h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.mailbox p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 18px;
+  color: #007bff;
+  text-align: center;
+}
+
+.mailbox.inbox {
+  background-color: #ffdab9;
+}
+
+.mailbox.sent {
+  background-color: #add8e6;
+}
+
+.mailbox.draft {
+  background-color: #d3d3d3;
+}
+
+.mailbox.trash {
+  background-color: #f08080;
+}
+
+/* Unread Mail styles */
+.main-left h2 + p {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 24px;
+  color: #333;
+}
+
+.main-right {
+  float: right;
+  width: 65%;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8%;
+}
+
+/* Documents styles */
+.documents {
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.documents h2 {
+  margin-bottom: 20px;
+  color: #333333;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.documents ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.documents ul li {
+  margin-bottom: 10px;
+}
+
+.documents ul li a {
+  display: block;
+  padding: 15px;
+  background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+  border-radius: 10px;
+  color: #333333;
+  transition: all 0.3s ease;
+  border: 1px solid #cccccc;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.documents ul li a:hover {
+  background: linear-gradient(to bottom, #007bff, #0056b3);
+  color: #ffffff;
+  border-color: #007bff;
+  text-decoration: none;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  background-color: #5f85db;
+  padding: 20px 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Media queries */
+@media screen and (max-width: 768px) {
+  .main-left {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .mailboxes {
+    margin-top: 10%;
+  }
+
+  .main-right {
+    float: none;
+    width: 100%;
+    margin-top: 20px;
+  }
+  h1 {
+    font-size: 8vw;
+  }
+
+  h2 {
+    font-size: 5vw;
+  }
+
+  p {
+    font-size: 3vw;
+  }
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+hr {
+  text-align: center;
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #3e8e41;
 }
