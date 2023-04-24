@@ -2,7 +2,6 @@
 <html>
 <head>
     {% load static %}
-    <!-- Include necessary CSS and JS files for modal window -->
     <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/modal.js' %}"></script>
@@ -15,19 +14,15 @@
         <input type="submit" value="Upload">
     </form>
 
-    <!-- Add modal HTML markup with id 'myModal' and desired content -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Success!</h2>
             <p>File uploaded successfully.</p>
-            <!-- Display uploaded document name or any other success message -->
         </div>
     </div>
 
-    <!-- Include JS code to show modal window after successful upload -->
     <script>
-        // Check for success_page in URL and show modal accordingly
         var successPage = new URLSearchParams(window.location.search).get('success_page');
         if (successPage === 'true') {
             $('#myModal').show();

@@ -66,7 +66,6 @@ def pdfView(request):
         response = HttpResponse(pdf_file, content_type='application/pdf')
         response['Content-Disposition'] = 'filename="myfile.pdf"'
 
-        # Set the Content-Security-Policy header to allow displaying the PDF file within an iframe
         response['Content-Security-Policy'] = "frame-ancestors 'self';"
 
         return response
@@ -79,7 +78,7 @@ def ppt_to_pdf(input_path, output_path):
     powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
     powerpoint.Visible = 1
     presentation = powerpoint.Presentations.Open(input_path)
-    presentation.SaveAs(output_path, 32)  # 32 is the PDF file format
+    presentation.SaveAs(output_path, 32)
     presentation.Close()
     powerpoint.Quit()
 
@@ -98,18 +97,15 @@ def upload_document(request):
     if request.method == 'POST':
         document = request.FILES.get('document')
         if document:
-            # Save the uploaded file to a desired location
             document_name = document.name
             document_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
             with open(document_path, 'wb+') as destination:
                 for chunk in document.chunks():
                     destination.write(chunk)
-            # Process the document or store the name in a variable
-            # ...
             response_data = {
                 'status': 'success',
                 'document_name': document.name,
             }
-            success_page_url = '/testcase/?success_page=true'  # Modify the URL as needed
+            success_page_url = '/testcase/?success_page=true'
             return HttpResponseRedirect(success_page_url)
     return render(request, 'fileupload.html')
