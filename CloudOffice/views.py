@@ -8,7 +8,10 @@ import comtypes.client
 import json
 
 def home(request):
-    return render(request, 'signin.html')
+    if(request.user.is_authenticated):
+        return redirect ('authenticated_home')
+    else:
+        return redirect ('login')
 
 def index(request):
     return render(request, 'index.html')

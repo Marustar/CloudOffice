@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.views import LoginView as DjangoLoginView, LogoutView as DjangoLogoutView
@@ -37,13 +37,10 @@ class RegisterView(DjangoLoginView):
         form = RegisterForm(request.POST)
         print(form)
         if form.is_valid():
-            print('valid')
             user = form.save()
             emp = Employee()
             emp.Emp_User = user
             emp.Emp_Rank = 1
             emp.save()
-            return redirect('login')
-        else:
-            print('not valid')
+            return redirect('login')    
         return render(request, '../Template/register.html', {'form': form})
