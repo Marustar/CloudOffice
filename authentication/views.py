@@ -30,14 +30,20 @@ class RegisterView(DjangoLoginView):
 
     def get(self, request):
         form = RegisterForm()
+        print("TEST PAGE")
         return render(request, '../Template/register.html', {'form': form})
 
     def post(self, request):
         form = RegisterForm(request.POST)
+        print(form)
         if form.is_valid():
+            print('valid')
             user = form.save()
             emp = Employee()
             emp.Emp_User = user
             emp.Emp_Rank = 1
+            emp.save()
             return redirect('login')
-        return render(request, '../Template/login.html', {'form': form})
+        else:
+            print('not valid')
+        return render(request, '../Template/register.html', {'form': form})

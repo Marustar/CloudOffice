@@ -18,7 +18,6 @@ from django.urls import path,include
 from CloudOffice import views
 from .views import home
 
-
 urlpatterns = [
     path('', home, name='home'),
     path('approval.html', views.approval, name='approval'),
@@ -37,5 +36,7 @@ urlpatterns = [
     path('viewer/', views.viewer, name='viewer'),
     path('pdf/', views.pdfView, name='pdfView'),
     path('api/auth/', include('authentication.urls')),
-    path('testcase/', views.upload_document, name='upload_document')
+    path('testcase/', views.upload_document, name='upload_document'),
+
+    path('auth/', include('authentication.urls')),
 ]
