@@ -16,7 +16,7 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="{% url 'home' %}">메인</a></li>
+          <li><a href="{% url 'authenticated_home' %}">메인</a></li>
           <li><a href="{% url 'document' %}">문서 관리</a></li>
           <li><a href="{% url 'mail' %}">메일함</a></li>
           <li><a href="{% url 'data' %}">데이터 관리</a></li>
@@ -37,10 +37,10 @@
 
 <script>
   window.addEventListener('scroll', function () {
-    const header = document.querySelector('header')
-    header.classList.toggle('scrolled', window.scrollY > 0)
-  })
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', window.scrollY > 0);
+  });
   function openPopup(url) {
-    window.open(url, 'Popup Window', 'width=800,height=600')
+    window.open(url, 'Popup Window', 'width=800,height=600');
   }
 </script>
