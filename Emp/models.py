@@ -8,10 +8,10 @@ class Department(models.Model):
     Dept_Name = models.CharField(max_length = 20)
 
 class Employee (models.Model):
-    User_User = models.ForeignKey(User, on_delete = models.CASCADE)
-    User_Name = models.CharField(max_length = 10)
-    User_Rank = models.IntegerField()
-    User_Dept = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
+    Emp_User = models.ForeignKey(User, on_delete = models.CASCADE)
+    Emp_Name = models.CharField(max_length = 10)
+    Emp_Rank = models.IntegerField()
+    Emp_Dept = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
 
 
 

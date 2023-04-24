@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.views import LoginView as DjangoLoginView, LogoutView as DjangoLogoutView
 from django.views import View
+from Emp.models import Employee
+
 
 class LoginView(DjangoLoginView):
     permission_classes = (permissions.AllowAny,)
@@ -34,5 +36,8 @@ class RegisterView(DjangoLoginView):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            emp = Employee()
+            emp.Emp_User = user
+            emp.Emp_Rank = 1
             return redirect('login')
-        return render(request, '../Template/register.html', {'form': form})
+        return render(request, '../Template/login.html', {'form': form})
