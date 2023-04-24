@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+from django.shortcuts import render, redirect
 import os
 from django.http import HttpResponse
 import comtypes.client
+import json
 
 def home(request):
     return render(request, 'signin.html')
@@ -90,3 +92,24 @@ def convert_ppt_to_pdf(request):
         response = HttpResponse(f.read(), content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename=output.pdf'
         return response
+
+
+def upload_document(request):
+    if request.method == 'POST':
+        document = request.FILES.get('document')
+        if document:
+            # Save the uploaded file to a desired location
+            document_name = document.name
+            document_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
+            with open(document_path, 'wb+') as destination:
+                for chunk in document.chunks():
+                    destination.write(chunk)
+            # Process the document or store the name in a variable
+            # ...
+            response_data = {
+                'status': 'success',
+                'document_name': document.name,
+            }
+            success_page_url = '/testcase/?success_page=true'  # Modify the URL as needed
+            return HttpResponseRedirect(success_page_url)
+    return render(request, 'fileupload.html')
