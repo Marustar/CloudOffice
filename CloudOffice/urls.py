@@ -16,9 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from CloudOffice import views
+from .views import home
 
 urlpatterns = [
+    path('', home, name='home'),
+    path('approval.html', views.approval, name='approval'),
+    path('data.html', views.data, name='data'),
+    path('document.html', views.document, name='document'),
+    path('index.html', views.index, name='authenticated_home'),
+    path('mail.html', views.mail, name='mail'),
+    path('sent.html', views.sent, name='sent'),
+    path('server.html', views.server, name='server'),
+    path('signin.html', views.signin, name='signin'),
+    path('signup.html', views.signup, name='signup'),
+    path('sns.html', views.sns, name='sns'),
+    path('popup.html', views.popup, name='popup'),
+
     path('admin/', admin.site.urls),
-    path('viewer_ppt/', views.ppt_viewer, name='viewer_ppt'),
-    path('api/auth/', include('authentication.urls')), 
+    path('viewer/', views.viewer, name='viewer'),
+    path('pdf/', views.pdfView, name='pdfView'),
+    path('api/auth/', include('authentication.urls')),
+    path('testcase/', views.upload_document, name='upload_document'),
+
+    path('auth/', include('authentication.urls')),
 ]
