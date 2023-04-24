@@ -16,8 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from CloudOffice import views
-from .views import pdfView
-from .views import viewer
 from .views import home
 
 
@@ -36,7 +34,8 @@ urlpatterns = [
     path('popup.html', views.popup, name='popup'),
 
     path('admin/', admin.site.urls),
-    path('viewer/', viewer, name='viewer'),
-    path('pdf/', pdfView, name='pdfView'),
+    path('viewer/', views.viewer, name='viewer'),
+    path('pdf/', views.pdfView, name='pdfView'),
     path('api/auth/', include('authentication.urls')),
+    path('testcase/', views.upload_document, name='upload_document')
 ]
