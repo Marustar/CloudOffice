@@ -16,16 +16,16 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html">메인</a></li>
-          <li><a href="document.html">문서 관리</a></li>
-          <li><a href="mail.html">메일함</a></li>
-          <li><a href="data.html">데이터 관리</a></li>
-          <li><a href="server.html">서버 관리</a></li>
-          <li><a href="sns.html">SNS</a></li>
+          <li><a href="{% url 'home' %}">메인</a></li>
+          <li><a href="{% url 'document' %}">문서 관리</a></li>
+          <li><a href="{% url 'mail' %}">메일함</a></li>
+          <li><a href="{% url 'data' %}">데이터 관리</a></li>
+          <li><a href="{% url 'server' %}">서버 관리</a></li>
+          <li><a href="{% url 'sns' %}">SNS</a></li>
         </ul>
       </nav>
       <div class="header-login">
-        <a href="signin.html">Login</a>
+        <a href="{% url 'login' %}">Login</a>
       </div>
     </header>
     {% block content %} {% endblock %}
