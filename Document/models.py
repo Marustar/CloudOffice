@@ -1,18 +1,18 @@
 from django.db import models
-from ..User.models import Users, Departments
+from Emp.models import Employee, Department
 
 # Create your models here.
 
-class Files(models.Model):
+class File(models.Model):
     File_Name = models.CharField(max_length = 100)
     File_Extend = models.CharField(max_length = 10)
 
-class Documents(models.Model):
+class Document(models.Model):
     Doc_ID = models.IntegerField(primary_key=True)
-    Doc_Dept = models.ForeignKey(Departments, on_delete=models.CASCADE)
-    Doc_Sender = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True)
-    Doc_Reciever = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True)
+    Doc_Dept = models.ForeignKey(Department, on_delete=models.CASCADE)
+    Doc_Sender = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="Doc_Sender")
+    Doc_Reciever = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="Doc_Reciever")
     Doc_Title = models.CharField(max_length = 50)
     Doc_Type = models.IntegerField()
-    Doc_Files = models.ForeignKey(Files, on_delete=models.CASCADE, null = True)
+    Doc_Files = models.ForeignKey(File, on_delete=models.CASCADE, null = True)
     Doc_State = models.IntegerField()

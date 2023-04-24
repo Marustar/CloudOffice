@@ -1,0 +1,21 @@
+{% extends 'base.html' %}{% load static %}{% block content %}
+<main>
+  <h1>Document Management</h1>
+  <div class="document-boxes">
+    <div class="document-box">
+      <iframe
+        src="{% url 'pdfView' %}"
+        width="100%"
+        height="500px"
+        frameborder="0"
+      ></iframe>
+    </div>
+    <!-- more document boxes here -->
+  </div>
+  <div class="settings">
+    <h2>Settings</h2>
+    <button class="trash-button">Trash</button>
+    <button class="form-storage-button">Form Storage</button>
+  </div>
+</main>
+{% endblock %}

@@ -1,77 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="header-logo">
-        <img src="logo.png" alt="Cloud Office Logo" />
+{% extends 'base.html' %}{% load static %}{% block content %}
+<main>
+  <div class="main-left">
+    <h1>류재원 사원</h1>
+    <img src="static/img/face.png" alt="User" width="100" height="100" />
+    <div class="mailboxes">
+      <div class="mailbox inbox">
+        <h2>Inbox</h2>
+        <p>5 unread messages</p>
       </div>
-      <nav class="header-nav">
-        <ul>
-          <li><a href="index.html">Main</a></li>
-          <li><a href="document.html">Document Management</a></li>
-          <li><a href="server.html">Server Management</a></li>
-          <li><a href="data.html">Data Management</a></li>
-          <li><a href="sns.html">SNS</a></li>
-        </ul>
-      </nav>
-      <div class="header-login">
-        <a href="membership.html">Login</a>
+      <div class="mailbox sent">
+        <h2>Sent</h2>
+        <p>10 sent messages</p>
       </div>
-    </header>
-    <main>
-      <div class="hero-section">
-        <h1>Welcome to our Cloud Document Management System</h1>
-        <p>
-          Use the navigation menu to access different features of the system.
-        </p>
-        <a href="#" class="cta-button">Get Started</a>
+      <div class="mailbox draft">
+        <h2>Draft</h2>
+        <p>3 drafts</p>
       </div>
-      <div class="features-section">
-        <h2>Why Choose Our System?</h2>
-        <div class="feature-item">
-          <img src="document-icon.png" alt="Document Management Icon" />
-          <h3>Efficient Document Management</h3>
-          <p>
-            Our system allows you to easily upload, organize, and share your
-            documents with team members or clients, saving you time and
-            increasing productivity.
-          </p>
-        </div>
-        <div class="feature-item">
-          <img src="security-icon.png" alt="Security Icon" />
-          <h3>Secure and Reliable</h3>
-          <p>
-            With our state-of-the-art security features and reliable cloud
-            infrastructure, you can trust that your sensitive documents are
-            always safe and accessible.
-          </p>
-        </div>
-        <div class="feature-item">
-          <img src="support-icon.png" alt="Support Icon" />
-          <h3>Dedicated Support</h3>
-          <p>
-            Our team of experts is available 24/7 to answer any questions or
-            concerns you may have, and to provide personalized support to help
-            you get the most out of our system.
-          </p>
-        </div>
+      <div class="mailbox trash">
+        <h2>Trash</h2>
+        <p>2 deleted messages</p>
       </div>
-    </main>
-    <footer>
-      <p>&copy; 2023 My Cloud Docs</p>
-    </footer>
-  </body>
-</html>
+    </div>
+  </div>
+  <div class="main-right">
+    <div class="documents">
+      <h2>받은 문서</h2>
+      <ul>
+        <li>
+          <a href="#" onclick="openPopup('popup.html')">Document 1</a>
+        </li>
+        <li><a href="#">Document 2</a></li>
+        <li><a href="#">Document 3</a></li>
+        <li><a href="#">Document 4</a></li>
+      </ul>
+    </div>
 
-<script>
-  window.addEventListener('scroll', function () {
-    const header = document.querySelector('header');
-    header.classList.toggle('scrolled', window.scrollY > 0);
-  });
-</script>
+    <div class="documents">
+      <h2>받은 메일</h2>
+      <ul>
+        <li><a href="#">Mail 1</a></li>
+        <li><a href="#">Mail 2</a></li>
+        <li><a href="#">Mail 3</a></li>
+        <li><a href="#">Mail 4</a></li>
+      </ul>
+    </div>
+
+    <div class="documents">
+      <h2>처리 대기중 문서</h2>
+      <ul>
+        <li><a href="#">Document 1</a></li>
+        <li><a href="#">Document 2</a></li>
+        <li><a href="#">Document 3</a></li>
+        <li><a href="#">Document 4</a></li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

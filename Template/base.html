@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Base</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>
+    <header class="header">
+      <div class="header-logo">
+        <a href="{% url 'home' %}"
+          ><img src="{% static 'img/logo.png' %}" alt="Cloud Office Logo"
+        /></a>
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="{% url 'home' %}">메인</a></li>
+          <li><a href="{% url 'document' %}">문서 관리</a></li>
+          <li><a href="{% url 'mail' %}">메일함</a></li>
+          <li><a href="{% url 'data' %}">데이터 관리</a></li>
+          <li><a href="{% url 'server' %}">서버 관리</a></li>
+          <li><a href="{% url 'sns' %}">SNS</a></li>
+        </ul>
+      </nav>
+      <div class="header-login">
+        <a href="{% url 'login' %}">Login</a>
+      </div>
+    </header>
     {% block content %} {% endblock %}
+    <footer>
+      <p>&copy; 2023 My Cloud Docs</p>
+    </footer>
   </body>
 </html>
+
+<script>
+  window.addEventListener('scroll', function () {
+    const header = document.querySelector('header')
+    header.classList.toggle('scrolled', window.scrollY > 0)
+  })
+  function openPopup(url) {
+    window.open(url, 'Popup Window', 'width=800,height=600')
+  }
+</script>

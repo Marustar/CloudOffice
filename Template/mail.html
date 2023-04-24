@@ -1,0 +1,64 @@
+{% extends 'base.html' %}{% load static %}{% block content %}
+<main>
+  <div class="container">
+    <div class="sidebar">
+      <ul>
+        <li><a href="#">보낸 메일함</a></li>
+        <li><a href="#">받은 메일함</a></li>
+        <li><a href="#">임시 보관함</a></li>
+        <li><a href="#">휴지통</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="search">
+        <select name="search-classification">
+          <option value="">모든 메일</option>
+          <option value="1">읽음</option>
+          <option value="2">읽지 않음</option>
+        </select>
+        <input type="text" name="search-box" placeholder="Search" />
+        <input type="date" name="search-date" />
+        <button type="submit">Search Mail</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>제목</th>
+            <th>날짜</th>
+            <th>보낸이</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>안녕하세요?</td>
+            <td>2023-04-15</td>
+            <td>엄준식</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>DOC-002</td>
+            <td>2023-04-14</td>
+            <td>성기왕</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>DOC-003</td>
+            <td>2023-04-13</td>
+            <td>최번개</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <a href="#">Previous</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">Next</a>
+      </div>
+      <span>Page 1 of 3</span>
+    </div>
+  </div>
+</main>
+{% endblock %}

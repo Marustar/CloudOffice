@@ -1,72 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Server Management</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="header-logo">
-        <img src="logo.png" alt="Cloud Office Logo" />
+{% extends 'base.html' %}{% load static %}{% block content %}
+<main>
+  <h1>Server Management</h1>
+  <div class="server-information">
+    <h2>Server Information</h2>
+    <div class="server-info">
+      <div class="info">
+        <h3>Uptime</h3>
+        <p id="uptime"></p>
       </div>
-      <nav class="header-nav">
-        <ul>
-          <li><a href="index.html">Main</a></li>
-          <li><a href="document.html">Document Management</a></li>
-          <li><a href="server.html">Server Management</a></li>
-          <li><a href="data.html">Data Management</a></li>
-          <li><a href="sns.html">SNS</a></li>
-        </ul>
-      </nav>
-      <div class="header-login">
-        <a href="membership.html">Login</a>
+      <div class="info">
+        <h3>Storage Usage</h3>
+        <p id="storage"></p>
       </div>
-    </header>
-    <main>
-      <h1>Server Management</h1>
-      <div class="server-information">
-        <h2>Server Information</h2>
-        <div class="server-info">
-          <div class="info">
-            <h3>Uptime</h3>
-            <p id="uptime"></p>
-          </div>
-          <div class="info">
-            <h3>Storage Usage</h3>
-            <p id="storage"></p>
-          </div>
-          <div class="info">
-            <h3>Recent Issues</h3>
-            <ul id="recent-issues"></ul>
-          </div>
-        </div>
+      <div class="info">
+        <h3>Recent Issues</h3>
+        <ul id="recent-issues"></ul>
       </div>
-      <div class="settings">
-        <h2>Settings</h2>
-        <div class="setting">
-          <label for="password">Password Change</label>
-          <input type="password" id="password" />
-          <button id="change-password">Change</button>
-        </div>
-        <div class="setting">
-          <label for="auto-logout">Auto Logout (mins)</label>
-          <input
-            type="number"
-            id="auto-logout"
-            min="1"
-            max="60"
-            step="1"
-            value="10"
-          />
-          <button id="save-logout">Save</button>
-        </div>
-      </div>
-    </main>
-    <script src="script.js"></script>
-    <footer>
-      <p>&copy; 2023 My Cloud Docs</p>
-    </footer>
-  </body>
-</html>
+    </div>
+  </div>
+  <div class="settings">
+    <h2>Settings</h2>
+    <div class="setting">
+      <label for="password">Password Change</label>
+      <input type="password" id="password" />
+      <button id="change-password">Change</button>
+    </div>
+    <div class="setting">
+      <label for="auto-logout">Auto Logout (mins)</label>
+      <input
+        type="number"
+        id="auto-logout"
+        min="1"
+        max="60"
+        step="1"
+        value="10"
+      />
+      <button id="save-logout">Save</button>
+    </div>
+  </div>
+</main>
+{% endblock %}
+<!-- <script src="script.js"></script> -->

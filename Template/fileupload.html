@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+</head>
+<body>
+    <h1>File Upload</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="document">
+        <input type="submit" value="Upload">
+    </form>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Success!</h2>
+            <p>File uploaded successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        var successPage = new URLSearchParams(window.location.search).get('success_page');
+        if (successPage === 'true') {
+            $('#myModal').show();
+}
+
+        // Close modal when 'x' button is clicked
+        $('.close').on('click', function() {
+            $('#myModal').hide();
+        });
+    </script>
+</body>
+</html>
