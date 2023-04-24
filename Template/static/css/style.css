@@ -1551,3 +1551,20 @@ button {
 button:hover {
   background-color: #3e8e41;
 }
+
+.alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #f5c6cb;
+  border-radius: 0.25rem;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  font-weight: bold;
+}
