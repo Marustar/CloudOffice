@@ -27,8 +27,6 @@ urlpatterns = [
     path('mail.html', views.mail, name='mail'),
     path('sent.html', views.sent, name='sent'),
     path('server.html', views.server, name='server'),
-    path('signin.html', views.signin, name='signin'),
-    path('signup.html', views.signup, name='signup'),
     path('sns.html', views.sns, name='sns'),
     path('popup.html', views.popup, name='popup'),
 
