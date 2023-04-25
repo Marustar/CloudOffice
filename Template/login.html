@@ -9,8 +9,10 @@
           <div class = "alert alert-danger" role = "alert">
             {% for field in form %}
               {% if field.errors %}
-                <strong class = "alert">{{ field.label }}</strong>
-              {{ field.errors }}
+                <div>
+                  <strong class = "alert">{{ field.label }} 
+                    {{ field.errors }}</strong>
+                </div>
             {% endif %}
         {% endfor %}
           </div>
