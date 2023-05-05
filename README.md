@@ -12,7 +12,9 @@
 
 
 
-5.6 회원가입-로그인 작업
+
+
+5.6 bjpark21 : 회원가입, 로그인 작업
 
 1.authentication - forms.py 수정 (Emp-models.py 맞춰서)
 
