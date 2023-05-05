@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.views import LoginView as DjangoLoginView, LogoutView as DjangoLogoutView
-from django.views import View
 from Emp.models import Employee, Department
 from django.contrib import messages # 메시지 기능 추가
 from django.views.decorators.csrf import csrf_exempt
@@ -70,7 +69,3 @@ class RegisterView(DjangoLoginView):
 
         return render(request, 'register.html', {'form': form})
 
-
-def pending_registrations(request):
-    pending_users = Employee.objects.filter(is_approved=False)
-    return render(request, 'pending_registrations.html', {'pending_users': pending_users})
