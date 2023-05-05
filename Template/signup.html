@@ -3,7 +3,7 @@
   <h2>Register</h2>
   <section class="signup">
     <h2>Create Your Account</h2>
-    <form method = 'post'>
+    <form method="post">
       <div class="form-group">
         <label for="fullname">Full Name</label>
         <input type="text" id="fullname" required />
@@ -20,12 +20,12 @@
         <label for="confirm-password">Confirm Password</label>
         <input type="password" id="confirm-password" required />
       </div>
-      
+
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">Sign Up</button>
     </form>
   </section>
 
-  <p>이미 계정을 가지고 있습니까? <a href="{% url 'signin' %}">Login</a></p>
+  <p>이미 계정을 가지고 있습니까? <a href="{% url 'login' %}">Login</a></p>
 </main>
 {% endblock %}

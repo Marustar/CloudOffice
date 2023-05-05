@@ -8,41 +8,68 @@ import comtypes.client
 import json
 
 def home(request):
-    return render(request, 'signin.html')
+    if(request.user.is_authenticated):
+        return redirect ('authenticated_home')
+    else:
+        return redirect ('login')
 
 def index(request):
-    return render(request, 'index.html')
+    if(request.user.is_authenticated):
+        return render(request, 'index.html')
+    else:
+        return redirect ('login')
+    
 
 def approval(request):
-    return render(request, 'approval.html')
-
+    if(request.user.is_authenticated):
+        return render(request, 'approval.html')
+    else:
+        return redirect ('login')
+    
 def data(request):
-    return render(request, 'data.html')
+    if(request.user.is_authenticated):
+        return render(request, 'data.html')
+    else:
+        return redirect ('login')
 
 def document(request):
-    return render(request, 'document.html')
+    if(request.user.is_authenticated):
+        return render(request, 'document.html')
+    else:
+        return redirect ('login')
 
 def mail(request):
-    return render(request, 'mail.html')
+    if(request.user.is_authenticated):
+        return render(request, 'mail.html')
+    else:
+        return redirect ('login')
 
 def sent(request):
-    return render(request, 'sent.html')
+    if(request.user.is_authenticated):
+        return render(request, 'sent.html')
+    else:
+        return redirect ('login')
 
 def server(request):
-    return render(request, 'server.html')
+    if(request.user.is_authenticated):
+        return render(request, 'server.html')
+    else:
+        return redirect ('login')
 
-def signin(request):
-    return render(request, 'signin.html')
-
-def signup(request):
-    return render(request, 'signup.html')
 
 def sns(request):
-    return render(request, 'sns.html')
-
+    if(request.user.is_authenticated):
+        return render(request, 'sns.html')
+    else:
+        return redirect ('login')
+    
 def viewer(request):
-    return render(request, 'viewer.html')
+    if(request.user.is_authenticated):
+        return render(request, 'viewer.html')
+    else:
+        return redirect ('login')
 
+    
 def popup(request):
     return render(request, 'popup.html')
 
