@@ -1,6 +1,20 @@
-{% extends 'base.html' %}{% load static %}{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <main>
-  <h1>Document Management</h1>
+  <h1>문서 상세정보</h1>
+
+  <div class="document-info">
+    <h2></h2>
+    <ul>
+      <li><strong>작성자:</strong> {{ document.name }}</li>
+      <li><strong>문서번호:</strong> {{ document.number }}</li>
+      <li><strong>승인상태:</strong> {{ document.approval_status }}</li>
+      <li><strong>보고일자:</strong> {{ document.reporting_date }}</li>
+      <li><strong>발신/수신부서:</strong> {{ document.department }}</li>
+      <li><strong>승인자:</strong> {{ document.approver }}</li>
+      <li><strong>직급:</strong> {{ document.position }}</li>
+    </ul>
+  </div>
+
   <div class="document-boxes">
     <div class="document-box">
       <iframe
@@ -10,12 +24,36 @@
         frameborder="0"
       ></iframe>
     </div>
-    <!-- more document boxes here -->
   </div>
-  <div class="settings">
-    <h2>Settings</h2>
-    <button class="trash-button">Trash</button>
-    <button class="form-storage-button">Form Storage</button>
+
+  <div class="viewers">
+    <h3>문서 열람자</h3>
+    <ul>
+      {% for viewer in viewers %}
+      <li>{{ viewer }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="comments">
+    <h3>한줄 평</h3>
+    <form method="POST">
+      {% csrf_token %}
+      <textarea
+        name="comment"
+        placeholder="Write your comment here..."
+        rows="4"
+        cols="50"
+      ></textarea>
+      <br />
+      <button type="submit">Submit Comment</button>
+    </form>
+    {% for comment in comments %}
+    <div class="comment">
+      <p>{{ comment.content }}</p>
+      <p><strong>By:</strong> {{ comment.author }}</p>
+    </div>
+    {% endfor %}
   </div>
 </main>
 {% endblock %}
