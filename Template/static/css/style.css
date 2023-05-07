@@ -1237,20 +1237,20 @@ table tr:hover {
   color: #333;
 }
 
-.approval td:nth-child(2) {
+.approval td:nth-child(3) {
   font-weight: bold;
 }
 
 /* Approval status styles */
-.approval td:nth-child(2).status-pending {
+.approval td:nth-child(3).status-pending {
   color: #f39c12;
 }
 
-.approval td:nth-child(2).status-approved {
+.approval td:nth-child(3).status-approved {
   color: #2ecc71;
 }
 
-.approval td:nth-child(2).status-rejected {
+.approval td:nth-child(3).status-rejected {
   color: #e74c3c;
 }
 
@@ -1556,11 +1556,10 @@ button:hover {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
-  padding: 0.5rem;
-  padding-left : 1.5rem;
+  padding: 1rem;
   margin-bottom: 1rem;
+  border: 2px solid #f5c6cb;
   border-radius: 0.25rem;
-  
 }
 
 .alert-danger {
@@ -1568,11 +1567,109 @@ button:hover {
   background-color: #f8d7da;
   border-color: #f5c6cb;
   font-weight: bold;
-  padding : 0.5rem;
-  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.alert-box {
-  margin : 0.5rem;
-  padding : 0.5rem;
+/* Document info section */
+.document-info {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.document-info h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.document-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.document-info li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* Document box section */
+.document-boxes {
+  margin-bottom: 20px;
+}
+
+.document-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* Viewers section */
+.viewers {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.viewers h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.viewers ul {
+  list-style: none;
+  padding: 0;
+}
+
+.viewers li {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+/* Comments section */
+.comments {
+  margin-bottom: 20px;
+}
+
+.comments h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.comments form {
+  margin-bottom: 20px;
+}
+
+.comments form textarea {
+  width: 100%;
+  padding: 10px;
+  resize: vertical;
+  font-size: 16px;
+}
+
+.comments form button[type='submit'] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.comments form button[type='submit']:hover {
+  background-color: #555;
+}
+
+.comment {
+  margin-bottom: 10px;
+}
+
+.comment p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.comment strong {
+  font-weight: bold;
 }
