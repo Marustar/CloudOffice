@@ -27,12 +27,15 @@ def upgrade_reply(request):
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 try:
+                    print(user)
                     employee = Employee.objects.get(Emp_User=user)
                     if employee.is_approved:
                         login(request, user)
                         return redirect('authenticated_home')
                     else:
                         form.add_error(None, '계정이 아직 승인되지 않았습니다. 관리자의 승인을 기다려주세요.')
+                        
+                        return render(request, 'login')
                         return redirect('login')
                 except Employee.DoesNotExist:
                     form.add_error(None, '계정 정보를 찾을 수 없습니다.')

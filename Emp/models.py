@@ -5,6 +5,9 @@ class Department(models.Model):
     Dept_ID = models.IntegerField(primary_key=True)
     Dept_Name = models.CharField(max_length = 20)
 
+    def __str__(self):
+        return self.Dept_Name
+
 class Employee (models.Model):
     Emp_User = models.ForeignKey(User, on_delete = models.CASCADE)
     Emp_Name = models.CharField(max_length = 10)
@@ -13,6 +16,7 @@ class Employee (models.Model):
 
     is_approved = models.BooleanField(default=False)
 
-
+    def __str__(self):
+        return self.Emp_Name
 
 
