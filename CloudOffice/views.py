@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.shortcuts import render, redirect
@@ -6,6 +7,9 @@ import os
 from django.http import HttpResponse
 import comtypes.client
 import json
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 def home(request):
     if(request.user.is_authenticated):
@@ -136,3 +140,34 @@ def upload_document(request):
             success_page_url = '/testcase/?success_page=true'
             return HttpResponseRedirect(success_page_url)
     return render(request, 'fileupload.html')
+
+
+class SendEmailView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'send_email.html')
+
+    def post(self, request, *args, **kwargs):
+        try:
+            msg = MIMEMultipart()
+            message = request.POST.get('message')
+            password = request.POST.get('password')
+            msg['From'] = request.POST.get('from_email')
+            msg['To'] = request.POST.get('to_email')
+            msg['Subject'] = request.POST.get('subject')
+            
+            msg.attach(MIMEText(message, 'plain'))
+            
+            server = smtplib.SMTP('smtp.gmail.com: 587')
+            
+            server.starttls()
+            
+            server.login(msg['From'], password)
+            
+            server.sendmail(msg['From'], msg['To'], msg.as_string())
+            
+            server.quit()
+            
+            return HttpResponse("Successfully sent email")
+        
+        except Exception as e:
+            return HttpResponse("Failed to send email. Error: " + str(e))

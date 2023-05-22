@@ -1,0 +1,40 @@
+<!-- send_email.html
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Send Email</h2>
+    <form action="{% url 'send-email' %}" method="POST">
+        {% csrf_token %}
+        <label for="to_email">To:</label><br>
+        <input type="email" id="to_email" name="to_email" required><br>
+        <label for="subject">Subject:</label><br>
+        <input type="text" id="subject" name="subject" required><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" required></textarea><br>
+        <input type="submit" value="Send Email">
+    </form>
+</body>
+</html> -->
+
+
+<!-- send_email.html -->
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Send Email</h2>
+    <form action="{% url 'send-email' %}" method="POST">
+        {% csrf_token %}
+        <label for="from_email">From:</label><br>
+        <input type="email" id="from_email" name="from_email" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+        <label for="to_email">To:</label><br>
+        <input type="email" id="to_email" name="to_email" required><br>
+        <label for="subject">Subject:</label><br>
+        <input type="text" id="subject" name="subject" required><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" required></textarea><br>
+        <input type="submit" value="Send Email">
+    </form>
+</body>
+</html>

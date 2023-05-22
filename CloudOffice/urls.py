@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from CloudOffice import views
 from .views import home
+from .views import SendEmailView
 
 urlpatterns = [
     path('', home, name='home'),
@@ -37,4 +38,5 @@ urlpatterns = [
     path('testcase/', views.upload_document, name='upload_document'),
 
     path('auth/', include('authentication.urls')),
+    path('send-email/', SendEmailView.as_view(), name='send-email'),
 ]
