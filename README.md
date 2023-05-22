@@ -30,3 +30,7 @@
 
   -로그인 후 회원가입한 아이디 권한 변경
 
+4. gitignore 추가
+   
+   - 이후 최초 커밋 시 superuser(admin) 계정 새로 만들어야 함
+   - admin 페이지에서 admin 계정 정보 포함하는 Employee 객체 생성해둘 것
