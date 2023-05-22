@@ -10,10 +10,21 @@ import json
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from Document import models as Document
+from Mail import models as Mail
+from Emp import models as Emp
 
 def home(request):
     if(request.user.is_authenticated):
-        return redirect ('authenticated_home')
+        currentUser = Emp.Employee.objects.get(user = request.user)
+        recieveDoc = Document.Document.objects.filter(Doc_reciever = currentUser)
+        recieveMail = Mail.Mail.objects.filter(Mail_reciever = currentUser)
+        waitMail = Document.Document.objects.filter(Doc_reciever = currentUser)
+        return render (request, 'index.html', {
+            'recieve_document' : recieveDoc,
+            'recieve_mail' : recieveMail,
+            'wait_mail' : waitMail,
+        })
     else:
         return redirect ('login')
 
