@@ -14,6 +14,9 @@ from Document import models as Document
 from Mail import models as Mail
 from Emp import models as Emp
 
+def findUser(request):
+    return Emp.Employee.objects.get(Emp_User = request.user)
+
 def home(request):
     if(request.user.is_authenticated):
         return redirect ('authenticated_home')
@@ -22,7 +25,7 @@ def home(request):
 
 def index(request):
     if(request.user.is_authenticated):        
-        currentUser = Emp.Employee.objects.get(Emp_User = request.user)
+        currentUser = findUser(request)
         receiveDoc = Document.Document.objects.filter(Doc_Receiver = currentUser)
         receiveMail = Mail.Mail.objects.filter(Mail_Receiver = currentUser)
         waitMail = Document.Document.objects.filter(Doc_Receiver = currentUser)
@@ -49,7 +52,11 @@ def data(request):
 
 def document(request):
     if(request.user.is_authenticated):
-        return render(request, 'document.html')
+        currentUser = findUser(request)
+        receiveDoc = Document.Document.objects.filter(Doc_Receiver = currentUser)
+        return render(request, 'document.html',{
+            'receive_document' : receiveDoc
+        })
     else:
         return redirect ('login')
 
