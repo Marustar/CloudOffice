@@ -33,5 +33,5 @@ class RegisterForm(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
-            raise ValidationError("Username already exists. Please choose a different one.")
+            raise ValidationError("이미 존재하는 계정입니다.")
         return username
