@@ -13,6 +13,11 @@ class Employee (models.Model):
 
     is_approved = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        self.Emp_User.is_active = self.is_approved
+        self.Emp_User.save()
+        super(Employee, self).save(*args, **kwargs)
+
 
 
 

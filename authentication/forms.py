@@ -14,11 +14,9 @@ class RegisterForm(UserCreationForm):
     username = forms.CharField(max_length=30, required=True, label='Username')
     email = forms.EmailField(max_length=254, required=True, label='Email')
     Emp_Name = forms.CharField(max_length=10, required=True, label='Employee Name')
-    Emp_Dept = forms.ModelChoiceField(queryset=Department.objects.all(), required=True, label='Employee Department')
-
     class Meta:
         model = User
-        fields = ('username', 'email', 'Emp_Name', 'Emp_Dept', 'password1', 'password2')
+        fields = ('username', 'email', 'Emp_Name','password1', 'password2')
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -26,9 +24,8 @@ class RegisterForm(UserCreationForm):
         user.save()
 
         emp_name = self.cleaned_data.get('Emp_Name')
-        emp_dept = self.cleaned_data.get('Emp_Dept')
 
-        employee = Employee(Emp_User=user, Emp_Name=emp_name, Emp_Dept=emp_dept, is_approved=False)
+        employee = Employee(Emp_User=user, Emp_Name=emp_name,is_approved=False)
         employee.save()
         
         return user
