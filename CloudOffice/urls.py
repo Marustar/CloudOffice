@@ -30,9 +30,9 @@ urlpatterns = [
     path('server.html', views.server, name='server'),
     path('sns.html', views.sns, name='sns'),
     path('popup.html', views.popup, name='popup'),
-
+    path('viewer.html', views.viewer, name='viewer'),
     path('admin/', admin.site.urls),
-    path('viewer/', views.viewer, name='viewer'),
+    
     path('pdf/', views.pdfView, name='pdfView'),
     path('api/auth/', include('authentication.urls')),
     path('testcase/', views.upload_document, name='upload_document'),

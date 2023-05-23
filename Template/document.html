@@ -9,7 +9,7 @@
         <li><a href="approval.html">임시 저장 문서</a></li>
         <li><a href="#">보낸 문서함</a></li>
         <li><a href="#">받은 문서함</a></li>
-        <li><a href="sent.html">문서 결재해버리기 야발~~</a></li>
+        <li><a href="sent.html">휴지통</a></li>
       </ul>
     </div>
     <div class="content">
@@ -43,9 +43,9 @@
             <td>DOC-001</td>
             <td>2023-04-15</td>
             <td>
-              <a href="#" onclick="openPopup('popup.html')"
-                >Example Document 1</a
-              >
+              {% for d in receive_document %}
+              <a href="{{d.url}}">{{d}}</a>
+              {% endfor %}
             </td>
             <td>Marketing</td>
             <td>John Doe</td>
@@ -56,7 +56,11 @@
             <td><input type="checkbox" /></td>
             <td>DOC-002</td>
             <td>2023-04-14</td>
-            <td>Example Document 2</td>
+            <td>
+              {% for d in receive_document %}
+              <a href="{{d.url}}">{{d}}</a>
+              {% endfor %}
+            </td>
             <td>Sales</td>
             <td>Jane Smith</td>
             <td>Mark Lee</td>
@@ -66,7 +70,11 @@
             <td><input type="checkbox" /></td>
             <td>DOC-003</td>
             <td>2023-04-13</td>
-            <td>Example Document 3</td>
+            <td>
+              {% for d in receive_document %}
+              <a href="{{d.url}}">{{d}}</a>
+              {% endfor %}
+            </td>
             <td>Human Resources</td>
             <td>Mark Lee</td>
             <td>John Doe</td>

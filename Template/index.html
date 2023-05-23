@@ -2,56 +2,90 @@
 <main>
   <div class="main-left">
     <h1>류재원 사원</h1>
-    <img src="static/img/face.png" alt="User" width="100" height="100" />
-    <div class="mailboxes">
-      <div class="mailbox inbox">
-        <h2>Inbox</h2>
-        <p>5 unread messages</p>
-      </div>
-      <div class="mailbox sent">
-        <h2>Sent</h2>
-        <p>10 sent messages</p>
-      </div>
-      <div class="mailbox draft">
-        <h2>Draft</h2>
-        <p>3 drafts</p>
-      </div>
-      <div class="mailbox trash">
-        <h2>Trash</h2>
-        <p>2 deleted messages</p>
-      </div>
+    <div class="profile">
+      <img
+        src="{% static 'img/face.jpg' %}"
+        alt="User"
+        width="100"
+        height="100"
+      />
     </div>
+
+    <br />
+    <a href="https://www.joongbu.ac.kr/" target="_blank">
+      <img src="static/img/header_logo.png" alt="User" width="300" height="120"
+    /></a>
+    <a href="https://www.joongbu.ac.kr/" target="_blank">
+      <img src="static/img/header_logo.png" alt="User" width="300" height="120"
+    /></a>
+    <a href="https://www.joongbu.ac.kr/" target="_blank">
+      <img src="static/img/header_logo.png" alt="User" width="300" height="120"
+    /></a>
+    <a href="https://www.joongbu.ac.kr/" target="_blank">
+      <img src="static/img/header_logo.png" alt="User" width="300" height="120"
+    /></a>
   </div>
   <div class="main-right">
     <div class="documents">
       <h2>받은 문서</h2>
       <ul>
-        <li>
-          <a href="#" onclick="openPopup('popup.html')">Document 1</a>
-        </li>
-        <li><a href="#">Document 2</a></li>
-        <li><a href="#">Document 3</a></li>
-        <li><a href="#">Document 4</a></li>
+        {% for d in receive_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %}
       </ul>
     </div>
 
     <div class="documents">
       <h2>받은 메일</h2>
       <ul>
-        <li><a href="#">Mail 1</a></li>
-        <li><a href="#">Mail 2</a></li>
-        <li><a href="#">Mail 3</a></li>
-        <li><a href="#">Mail 4</a></li>
+        {% for d in receive_mail %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_mail %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_mail %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_mail %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_mail %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_mail %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in receive_mail %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %}
       </ul>
     </div>
 
     <div class="documents">
       <h2>처리 대기중 문서</h2>
       <ul>
-        <li><a href="#">Document 1</a></li>
-        <li><a href="#">Document 2</a></li>
-        <li><a href="#">Document 3</a></li>
-        <li><a href="#">Document 4</a></li>
+        {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %} {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{d}}</a></li>
+        {% endfor %}
       </ul>
     </div>
   </div>
