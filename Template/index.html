@@ -44,15 +44,6 @@
         {% endfor %} {% for d in receive_document %}
         <li><a href="{{d.url}}">{{d}}</a></li>
         {% endfor %}
-        <li>
-          <a href="#" onclick="openPopup('popup.html')">Document 1</a>
-        </li>
-        {% for d in receive_document %}
-        <li><a href="/Doc/{{d.Doc_ID}}">{{d}}</a></li>
-        {% endfor %}
-        <li><a href="#">Document 2</a></li>
-        <li><a href="#">Document 3</a></li>
-        <li><a href="#">Document 4</a></li>
       </ul>
     </div>
 
