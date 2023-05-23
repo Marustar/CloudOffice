@@ -9,17 +9,27 @@
   <body>
     <h1>문서 작성</h1>
     <form method="post" enctype="multipart/form-data">
-      <label for="document-number">문서 번호:</label><br />
-      <input type="text" id="document-number" name="document-number" /><br />
+      <label for="document-title">제목:</label><br />
+      <input type="text" id="document-title" name="document-title" /><br />
 
-      <label for="document-date">작성 일자:</label><br />
-      <input type="date" id="document-date" name="document-date" /><br />
+      <label for="position">문서유형:</label><br />
+      <select id="doc_type" name="doc_type">
+        <option value="">유형 선택</option>
+        {% for doc_type in document_types %}
+        <option value="{{ doc_type }}">{{ doc_type }}</option>
+        {% endfor %}</select
+      ><br />
 
       <label for="author-name">작성자 이름:</label><br />
       <input type="text" id="author-name" name="author-name" /><br />
 
-      <label for="document-title">제목:</label><br />
-      <input type="text" id="document-title" name="document-title" /><br />
+      <label for="position">직급:</label><br />
+      <select id="position" name="position">
+        <option value="">직급 선택</option>
+        {% for position in positions %}
+        <option value="{{ position }}">{{ position }}</option>
+        {% endfor %}</select
+      ><br />
 
       <label for="document-content">문서 내용:</label><br />
       <textarea id="document-content" name="document-content"></textarea><br />
