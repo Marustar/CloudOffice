@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" />
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/modal.js' %}"></script>
-</head>
-<body>
-    <h1>File Upload</h1>
+  </head>
+  <body>
+    <h1>문서 작성</h1>
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="document">
-        <input type="submit" value="Upload">
+      <label for="document-number">문서 번호:</label><br />
+      <input type="text" id="document-number" name="document-number" /><br />
+
+      <label for="document-date">작성 일자:</label><br />
+      <input type="date" id="document-date" name="document-date" /><br />
+
+      <label for="author-name">작성자 이름:</label><br />
+      <input type="text" id="author-name" name="author-name" /><br />
+
+      <label for="document-title">제목:</label><br />
+      <input type="text" id="document-title" name="document-title" /><br />
+
+      <label for="document-content">문서 내용:</label><br />
+      <textarea id="document-content" name="document-content"></textarea><br />
+      {% csrf_token %}
+      <input type="file" name="document" />
+      <input type="submit" value="Upload" />
     </form>
 
     <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Success!</h2>
-            <p>File uploaded successfully.</p>
-        </div>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Success!</h2>
+        <p>File uploaded successfully.</p>
+      </div>
     </div>
 
     <script>
-        var successPage = new URLSearchParams(window.location.search).get('success_page');
-        if (successPage === 'true') {
-            $('#myModal').show();
-}
+      var successPage = new URLSearchParams(window.location.search).get(
+        'success_page'
+      );
+      if (successPage === 'true') {
+        $('#myModal').show();
+      }
 
-        // Close modal when 'x' button is clicked
-        $('.close').on('click', function() {
-            $('#myModal').hide();
-        });
+      // Close modal when 'x' button is clicked
+      $('.close').on('click', function () {
+        $('#myModal').hide();
+      });
     </script>
-</body>
+  </body>
 </html>

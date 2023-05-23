@@ -15,4 +15,5 @@ class Mail(models.Model):
     Mail_Files = models.ForeignKey(File, on_delete=models.SET_NULL, null=True, default=None)
     Mail_Docs = models.ForeignKey(Document, on_delete=models.SET_NULL, null = True, default=None)
 
-    
+    def __str__(self):
+        return self.Mail_Title
