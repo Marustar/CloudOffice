@@ -38,7 +38,7 @@ urlpatterns = [
     
     path('pdf/', views.pdfView, name='pdfView'),
     path('api/auth/', include('authentication.urls')),
-    path('testcase/', views.upload_document, name='upload_document'),
+    # path('testcase/', views.upload_document, name='upload_document'),
 
     path('auth/', include('authentication.urls')),
     path('send-email/', SendEmailView.as_view(), name='send-email'),
