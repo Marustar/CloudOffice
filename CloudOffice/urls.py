@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from CloudOffice import views
+from Document.models import Document
 from .views import home
 from .views import SendEmailView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name='home'),
@@ -39,4 +42,5 @@ urlpatterns = [
 
     path('auth/', include('authentication.urls')),
     path('send-email/', SendEmailView.as_view(), name='send-email'),
-]
+    path('upload/', include('Document.urls')),  # 'Document' is the name of your app
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
