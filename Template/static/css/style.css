@@ -845,7 +845,6 @@ header .menu a:hover {
 
 main {
   max-width: 95%;
-  margin: 0 auto;
   padding: 50px 10px;
 }
 
@@ -1100,7 +1099,16 @@ footer p {
 }
 
 .sidebar {
-  width: 200px;
+  width: 60px;
+  transition: width 0s ease;
+  border-radius: 20px;
+  background-color: #d3d3d3;
+  color: white;
+  margin-right: 20px;
+}
+
+.sidebar:hover {
+  width: 200px; /* 마우스 커서가 위에 있을 때 너비 변경 */
 }
 
 .content {
@@ -1115,7 +1123,7 @@ footer p {
 .sidebar ul {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 20px;
 }
 
 .sidebar li {
@@ -1126,12 +1134,28 @@ footer p {
   display: block;
   padding: 5px;
   text-decoration: none;
-  color: #000;
+  color: #111;
   text-align: left;
+  color: inherit;
 }
 
 .sidebar a:hover {
-  background-color: #eee;
+  background-color: #6a87d8;
+}
+
+.sidebar li a {
+  display: flex;
+  align-items: center;
+}
+.sidebar li a .material-icons {
+  margin-right: 10px; /* 아이콘과 텍스트 사이의 간격 */
+}
+
+.sidebar li a span.text {
+  display: none; /* 기본적으로 텍스트 숨기기 */
+}
+.sidebar:hover li a span.text {
+  display: inline; /* 마우스 커서가 위에 있을 때 텍스트 표시 */
 }
 
 .content {
@@ -1330,10 +1354,14 @@ table tr:hover {
 }
 
 .main-left {
+  background-color: lightgray;
+  border-radius: 5%;
+  box-shadow: 4px 8px 8px -8px black;
   float: left;
   width: 30%;
   margin-top: 5%;
-  margin-right: 5%;
+  margin-right: 2%;
+  margin-left: 2%;
   text-align: center;
 }
 
@@ -1579,4 +1607,13 @@ button:hover {
 .alert-box {
   margin: 0.5rem;
   padding: 0.5rem;
+}
+
+.no-documents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: red;
+  font-size: 24px;
 }
