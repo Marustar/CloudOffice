@@ -43,7 +43,9 @@
         <li><a href="{{d.url}}">{{d}}</a></li>
         {% endfor %} {% for d in receive_document %}
         <li><a href="{{d.url}}">{{d}}</a></li>
-        {% endfor %}
+        {% endfor %} {% if not receive_document %}
+        <li class="no-documents">받은 문서가 없습니다.</li>
+        {% endif %}
       </ul>
     </div>
 
@@ -64,7 +66,9 @@
         <li><a href="{{d.url}}">{{d}}</a></li>
         {% endfor %} {% for d in receive_mail %}
         <li><a href="{{d.url}}">{{d}}</a></li>
-        {% endfor %}
+        {% endfor %} {% if not receive_document %}
+        <li class="no-documents">받은 메일이 없습니다.</li>
+        {% endif %}
       </ul>
     </div>
 
@@ -85,7 +89,9 @@
         <li><a href="{{d.url}}">{{d}}</a></li>
         {% endfor %} {% for d in wait_document %}
         <li><a href="{{d.url}}">{{d}}</a></li>
-        {% endfor %}
+        {% endfor %} {% if not receive_document %}
+        <li class="no-documents">처리 대기중 문서가 없습니다.</li>
+        {% endif %}
       </ul>
     </div>
   </div>
