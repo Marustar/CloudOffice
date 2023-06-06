@@ -21,7 +21,6 @@ def document_upload(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             form.instance.Doc_Dept = employee.Emp_Dept
-            form.save()
             
             document = request.FILES.get('document')
             if document:
@@ -39,12 +38,15 @@ def document_upload(request):
                 file_ist.File_Name = file_name
                 file_ist.File_Extend = file_extend
                 file_ist.save()
+                form.instance.Doc_Files = file_ist
                 
                 response_data = {
                     'status': 'success',
                     'document_name': document.name,
                 }
                 
+            
+            form.save()
             return redirect('/document_upload?success_page=true')
         else:
             print(form.errors)
