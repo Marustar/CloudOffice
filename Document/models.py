@@ -6,6 +6,7 @@ from Emp.models import Employee, Department
 class File(models.Model):
     File_Name = models.CharField(max_length = 100)
     File_Extend = models.CharField(max_length = 10)
+    
 
     def __str__(self):
         return self.File_Name
@@ -23,3 +24,4 @@ class Document(models.Model):
 
     def __str__(self):
         return self.Doc_Title
+

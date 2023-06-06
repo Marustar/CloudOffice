@@ -32,7 +32,7 @@ def document_upload(request):
                 file_extend = os.path.splitext(document_name)[1]
                 
                 file_ist = File()
-                file_ist.File_Name = file_name
+                file_ist.File_Name = file_name + file_extend
                 file_ist.File_Extend = file_extend
                 file_ist.save()
                 form.instance.Doc_Files = file_ist
@@ -63,7 +63,7 @@ def convert_ppt_to_pdf(file):
             for chunk in file.chunks():
                 temp_file.write(chunk)
 
-        pdf_path = file_path.replace('.ppt', '.pdf')
+        pdf_path = file_path.replace('.pptx', '.pdf')
         convert(file_path, pdf_path)
 
         os.remove(file_path)
@@ -83,7 +83,7 @@ def convert_doc_to_pdf(file):
             for chunk in file.chunks():
                 destination.write(chunk)
 
-        pdf_path = file_path.replace('.doc', '.pdf')
+        pdf_path = file_path.replace('.docx', '.pdf')
 
         convert(file_path, pdf_path)
 

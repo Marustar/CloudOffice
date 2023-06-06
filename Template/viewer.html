@@ -5,20 +5,20 @@
   <div class="document-info">
     <h2></h2>
     <ul>
-      <li><strong>작성자:</strong> {{ document.name }}</li>
-      <li><strong>문서번호:</strong> {{ document.number }}</li>
+      <li><strong>작성자:</strong> {{ Document.Doc_Sender }} {{Rank}}</li>
+      <li><strong>문서번호:</strong> {{ Document.Doc_ID }}</li>
       <li><strong>승인상태:</strong> {{ document.approval_status }}</li>
       <li><strong>보고일자:</strong> {{ document.reporting_date }}</li>
-      <li><strong>발신/수신부서:</strong> {{ document.department }}</li>
-      <li><strong>승인자:</strong> {{ document.approver }}</li>
-      <li><strong>직급:</strong> {{ document.position }}</li>
+      <li><strong>발신부서:</strong> {{ Document.Doc_Dept }}</li>
+      <li><strong>승인자:</strong> {{ Document.Doc_Receiver }}</li>
+
     </ul>
   </div>
 
   <div class="document-boxes">
     <div class="document-box">
       <iframe
-        src="{% url 'pdfView' %}"
+        src="{% url 'pdfView' Doc_ID=Document.Doc_ID %}"
         width="100%"
         height="500px"
         frameborder="0"
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="viewers">
+  <!-- <div class="viewers">
     <h3>문서 열람자</h3>
     <ul>
       {% for viewer in viewers %}
@@ -34,7 +34,7 @@
       {% endfor %}
     </div>
     </ul>
-  </div>
+  </div> -->
 
   <div class="comments">
     <h3>한줄 평</h3>

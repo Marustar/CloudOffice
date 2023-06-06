@@ -31,10 +31,10 @@ urlpatterns = [
     path('server.html', views.server, name='server'),
     path('sns.html', views.sns, name='sns'),
     path('popup.html', views.popup, name='popup'),
-    path('viewer.html', views.viewer, name='viewer'),
+    path('viewer.html/<int:Doc_ID>/', views.viewer, name='viewer'),
     path('admin/', admin.site.urls),
     
-    path('pdf/<str:document_name>/', views.pdfView, name='pdfView'),
+    path('pdf/<int:Doc_ID>/', views.pdfView, name='pdfView'),
     path('api/auth/', include('authentication.urls')),
     # path('testcase/', views.upload_document, name='upload_document'),
 
