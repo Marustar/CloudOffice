@@ -17,13 +17,11 @@ from django.contrib import admin
 from django.urls import path,include
 from CloudOffice import views
 from Document.models import Document
-from .views import home
-from .views import SendEmailView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', views.home, name='home'),
     path('approval.html', views.approval, name='approval'),
     path('data.html', views.data, name='data'),
     path('document.html', views.document, name='document'),
@@ -41,6 +39,6 @@ urlpatterns = [
     # path('testcase/', views.upload_document, name='upload_document'),
 
     path('auth/', include('authentication.urls')),
-    path('send-email/', SendEmailView.as_view(), name='send-email'),
+    #path('send-email/', SendEmailView.as_view(), name='send-email'),
     path('upload/', include('Document.urls')),  # 'Document' is the name of your app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

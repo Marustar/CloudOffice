@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 from docx import Document
 from django.conf import settings
 from docx2pdf import convert
-import pdfkit
 import os
 
 @login_required
