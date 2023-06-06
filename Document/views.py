@@ -27,9 +27,6 @@ def document_upload(request):
             if document:
                 document_name = process_file(document)
                 document_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
-                with open(document_path, 'wb+') as destination:
-                    for chunk in document.chunks():
-                        destination.write(chunk)
                 
                 file_name = os.path.splitext(document_name)[0]
                 file_extend = os.path.splitext(document_name)[1]
@@ -60,6 +57,7 @@ def convert_ppt_to_pdf(file):
     file_extension = os.path.splitext(file.name)[1].lower()
 
     if file_extension in ['.ppt', '.pptx']:
+        document_name = file.name
         file_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
         with open(file_path, 'wb') as temp_file:
             for chunk in file.chunks():
