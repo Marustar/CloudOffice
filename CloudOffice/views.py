@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.views import View
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.shortcuts import render, redirect
@@ -7,15 +6,6 @@ import os
 from django.http import HttpResponse
 import comtypes.client
 import json
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from Document import models as Document
-from Mail import models as Mail
-from Emp import models as Emp
-
-def findUser(request):
-    return Emp.Employee.objects.get(Emp_User = request.user)
 
 def home(request):
     if(request.user.is_authenticated):
@@ -24,16 +14,8 @@ def home(request):
         return redirect ('login')
 
 def index(request):
-    if(request.user.is_authenticated):        
-        currentUser = findUser(request)
-        receiveDoc = Document.Document.objects.filter(Doc_Receiver = currentUser)
-        receiveMail = Mail.Mail.objects.filter(Mail_Receiver = currentUser)
-        waitMail = Document.Document.objects.filter(Doc_Receiver = currentUser)
-        return render (request, 'index.html', {
-            'receive_document' : receiveDoc,
-            'receive_mail' : receiveMail,
-            'wait_mail' : waitMail,
-        })
+    if(request.user.is_authenticated):
+        return render(request, 'index.html')
     else:
         return redirect ('login')
     
@@ -52,11 +34,7 @@ def data(request):
 
 def document(request):
     if(request.user.is_authenticated):
-        currentUser = findUser(request)
-        receiveDoc = Document.Document.objects.filter(Doc_Receiver = currentUser)
-        return render(request, 'document.html',{
-            'receive_document' : receiveDoc
-        })
+        return render(request, 'document.html')
     else:
         return redirect ('login')
 
@@ -90,8 +68,8 @@ def viewer(request):
         return render(request, 'viewer.html')
     else:
         return redirect ('login')
-
     
+
 def popup(request):
     return render(request, 'popup.html')
 
@@ -158,34 +136,3 @@ def upload_document(request):
             success_page_url = '/testcase/?success_page=true'
             return HttpResponseRedirect(success_page_url)
     return render(request, 'fileupload.html')
-
-
-class SendEmailView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'send_email.html')
-
-    def post(self, request, *args, **kwargs):
-        try:
-            msg = MIMEMultipart()
-            message = request.POST.get('message')
-            password = request.POST.get('password')
-            msg['From'] = request.POST.get('from_email')
-            msg['To'] = request.POST.get('to_email')
-            msg['Subject'] = request.POST.get('subject')
-            
-            msg.attach(MIMEText(message, 'plain'))
-            
-            server = smtplib.SMTP('smtp.gmail.com: 587')
-            
-            server.starttls()
-            
-            server.login(msg['From'], password)
-            
-            server.sendmail(msg['From'], msg['To'], msg.as_string())
-            
-            server.quit()
-            
-            return HttpResponse("Successfully sent email")
-        
-        except Exception as e:
-            return HttpResponse("Failed to send email. Error: " + str(e))
