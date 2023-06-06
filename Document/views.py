@@ -4,8 +4,10 @@ from .forms import DocumentForm
 from Emp.models import Employee, Department
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from docx import Document
 from django.conf import settings
 from docx2pdf import convert
+import pdfkit
 import os
 
 @login_required
@@ -31,8 +33,8 @@ def document_upload(request):
                     for chunk in document.chunks():
                         destination.write(chunk)
                 
-                #file_name = os.path.splitext(document_name)[0]
-                #file_extend = os.path.splitext(document_name)[1]
+                file_name = os.path.splitext(document_name)[0]
+                file_extend = os.path.splitext(document_name)[1]
                 
                 file_ist = File()
                 file_ist.File_Name = file_name
@@ -83,19 +85,16 @@ def convert_doc_to_pdf(file):
     file_extension = os.path.splitext(file.name)[1].lower()
 
     if file_extension == '.doc':
-        file_path = default_storage.save(file.name, file)
+        document_name = file.name
+        file_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
 
-        pdf_document = PDFDocument()
-
-        doc = Document(file_path)
-
-        for paragraph in doc.paragraphs:
-            pdf_document.add_paragraph(paragraph.text)
+        with open(file_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
 
         pdf_path = file_path.replace('.doc', '.pdf')
 
-        with open(pdf_path, 'wb') as pdf_file:
-            pdf_document.save(pdf_file)
+        convert(file_path, pdf_path)
 
         with open(pdf_path, 'rb') as pdf_file:
             pdf_data = pdf_file.read()
