@@ -25,8 +25,7 @@ def document_upload(request):
             
             document = request.FILES.get('document')
             if document:
-                document = process_file(document)
-                document_name = document.name
+                document_name = process_file(document)
                 document_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
                 with open(document_path, 'wb+') as destination:
                     for chunk in document.chunks():
@@ -60,30 +59,25 @@ def document_upload(request):
 def convert_ppt_to_pdf(file):
     file_extension = os.path.splitext(file.name)[1].lower()
 
-    if file_extension == '.ppt':
-        file_path = 'temp.ppt'
+    if file_extension in ['.ppt', '.pptx']:
+        file_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
         with open(file_path, 'wb') as temp_file:
             for chunk in file.chunks():
                 temp_file.write(chunk)
 
-        pdf_path = 'converted.pdf'
+        pdf_path = file_path.replace('.ppt', '.pdf')
         convert(file_path, pdf_path)
 
         os.remove(file_path)
 
-        with open(pdf_path, 'rb') as pdf_file:
-            pdf_data = pdf_file.read()
-
-        os.remove(pdf_path)
-
-        return pdf_data
+        return os.path.basename(pdf_path)
 
     return None
 
 def convert_doc_to_pdf(file):
     file_extension = os.path.splitext(file.name)[1].lower()
 
-    if file_extension == '.doc':
+    if file_extension in ['.doc', '.docx']:
         document_name = file.name
         file_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
 
@@ -95,22 +89,19 @@ def convert_doc_to_pdf(file):
 
         convert(file_path, pdf_path)
 
-        with open(pdf_path, 'rb') as pdf_file:
-            pdf_data = pdf_file.read()
-
         os.remove(file_path)
-        os.remove(pdf_path)
 
-        return pdf_data
+        return os.path.basename(pdf_path)
 
     return None
 
 def process_file(file):
     file_extension = os.path.splitext(file.name)[1].lower()
+    
 
-    if file_extension == '.ppt':
+    if file_extension in ['.ppt', '.pptx']:
         return convert_ppt_to_pdf(file)
-    elif file_extension == '.doc':
+    elif file_extension in ['.doc', '.docx']:
         return convert_doc_to_pdf(file)
 
     return None
