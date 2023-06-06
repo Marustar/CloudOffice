@@ -30,8 +30,9 @@
     <h3>문서 열람자</h3>
     <ul>
       {% for viewer in viewers %}
-      <li>{{ viewer }}</li>
+        <iframe src="{% url 'pdfView' document_name='testcase.pdf' %}" width="100%" height="500px"></iframe>
       {% endfor %}
+    </div>
     </ul>
   </div>
 

@@ -74,20 +74,14 @@ def popup(request):
     return render(request, 'popup.html')
 
 
-def pdfView(request):
-    pdf_path = os.path.join(settings.BASE_DIR, 'DocumentData', 'testcase.pdf')
-    ppt_path = os.path.join(settings.BASE_DIR, 'DocumentData', 'testcase.pptx')
+def pdfView(request, document_name):
+    pdf_path = os.path.join(settings.BASE_DIR, 'DocumentData', 'document_name')
 
     if os.path.exists(pdf_path):
         with open(pdf_path, 'rb') as f:
             pdf_file = f.read()
     else:
-        if os.path.exists(ppt_path):
-            ppt_to_pdf(ppt_path, pdf_path)
-            with open(pdf_path, 'rb') as f:
-                pdf_file = f.read()
-        else:
-            pdf_file = None
+        pdf_file = None
 
     if pdf_file is not None:
         response = HttpResponse(pdf_file, content_type='application/pdf')

@@ -34,7 +34,7 @@ urlpatterns = [
     path('viewer.html', views.viewer, name='viewer'),
     path('admin/', admin.site.urls),
     
-    path('pdf/', views.pdfView, name='pdfView'),
+    path('pdf/<str:document_name>/', views.pdfView, name='pdfView'),
     path('api/auth/', include('authentication.urls')),
     # path('testcase/', views.upload_document, name='upload_document'),
 
