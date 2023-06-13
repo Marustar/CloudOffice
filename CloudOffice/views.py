@@ -15,7 +15,9 @@ from Document import models as Document
 from Mail import models as Mail
 from Emp import models as Emp
 from Document.models import File
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def findUser(request):
     return Emp.Employee.objects.get(Emp_User = request.user)
 
@@ -29,8 +31,22 @@ def home(request):
 def index(request):
     if(request.user.is_authenticated):        
         currentUser = findUser(request)
+        
+        if(currentUser.Emp_Rank == 1):
+            currentUser.Emp_Rank = "사원"
+        elif(currentUser.Emp_Rank == 2):
+            currentUser.Emp_Rank = "대리"
+        elif(currentUser.Emp_Rank == 3):
+            currentUser.Emp_Rank = "과장"
+        elif(currentUser.Emp_Rank == 4):
+            currentUser.Emp_Rank = "차장"
+        elif(currentUser.Emp_Rank == 5):
+            currentUser.Emp_Rank = "부장"
+        elif(currentUser.Emp_Rank == 6):
+            currentUser.Emp_Rank = "사장"
+            
+
         receiveDoc = Document.Document.objects.filter(Doc_Receiver = currentUser)
-        print(receiveDoc[0].Doc_ID)
         # print(receiveDoc[0].id)
         receiveMail = Mail.Mail.objects.filter(Mail_Receiver = currentUser)
         waitMail = Document.Document.objects.filter(Doc_Receiver = currentUser)
@@ -38,6 +54,9 @@ def index(request):
             'receive_document' : receiveDoc,
             'receive_mail' : receiveMail,
             'wait_mail' : waitMail,
+            'user_name': currentUser,
+            "user_Rank": currentUser.Emp_Rank,
+
         })
     else:
         return redirect ('login')
