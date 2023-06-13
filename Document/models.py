@@ -21,7 +21,6 @@ class Document(models.Model):
     Doc_Files = models.ForeignKey(File, on_delete=models.CASCADE, null = True)
     Doc_State = models.IntegerField()
     Doc_Content = models.TextField(default="")
-    Doc_Check = models.IntegerField(null=True)
 
     def __str__(self):
         return self.Doc_Title

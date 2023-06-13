@@ -8,7 +8,6 @@ from docx import Document
 from django.conf import settings
 from docx2pdf import convert
 import os
-import comtypes.client
 
 @login_required
 def document_upload(request):

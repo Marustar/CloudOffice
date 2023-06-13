@@ -29,9 +29,9 @@ def home(request):
         return redirect ('login')
 
 def index(request):
-    if(request.user.is_authenticated):        
+    if(request.user.is_authenticated):
         currentUser = findUser(request)
-        
+
         if(currentUser.Emp_Rank == 1):
             currentUser.Emp_Rank = "사원"
         elif(currentUser.Emp_Rank == 2):
@@ -44,7 +44,7 @@ def index(request):
             currentUser.Emp_Rank = "부장"
         elif(currentUser.Emp_Rank == 6):
             currentUser.Emp_Rank = "사장"
-            
+
 
         receiveDoc = Document.Document.objects.filter(Doc_Receiver = currentUser)
         # print(receiveDoc[0].id)
@@ -81,30 +81,7 @@ def document(request):
     else:
         return redirect ('login')
 
-def mail(request):
-    if(request.user.is_authenticated):
-        return render(request, 'mail.html')
-    else:
-        return redirect ('login')
 
-def sent(request):
-    if(request.user.is_authenticated):
-        return render(request, 'sent.html')
-    else:
-        return redirect ('login')
-
-def server(request):
-    if(request.user.is_authenticated):
-        return render(request, 'server.html')
-    else:
-        return redirect ('login')
-
-
-def sns(request):
-    if(request.user.is_authenticated):
-        return render(request, 'sns.html')
-    else:
-        return redirect ('login')
     
 def viewer(request, Doc_ID):
     if(request.user.is_authenticated):
@@ -122,38 +99,27 @@ def viewer(request, Doc_ID):
             rank = "부장"
         elif(rank == 6):
             rank = "사장"
-        return render(request, 'viewer.html',{"Document":document, "Rank":rank} )
+            
+        rerank = document.Doc_Receiver.Emp_Rank
+        if(rerank == 1):
+            rerank = "사원"
+        elif(rerank == 2):
+            rerank = "대리"
+        elif(rerank == 3):
+            rerank = "과장"
+        elif(rerank == 4):
+            rerank = "차장"
+        elif(rerank == 5):
+            rerank = "부장"
+        elif(rerank == 6):
+            rerank = "사장"
+        return render(request, 'viewer.html',{"Document":document, "Rank":rank, "ReRank": rerank} )
     
     else:
         return redirect ('login')
     
 
-def popup(request):
-    return render(request, 'popup.html')
 
-
-# def pdfView(request, file_id):
-
-#     file = get_object_or_404(File, id = file_id)
-#     document_name = "{}{}".format(file.File_Name, file.File_Extend)
-
-#     pdf_path = os.path.join(settings.BASE_DIR, 'DocumentData', 'document_name')
-
-#     if os.path.exists(pdf_path):
-#         with open(pdf_path, 'rb') as f:
-#             pdf_file = f.read()
-#     else:
-#         pdf_file = None
-
-#     if pdf_file is not None:
-#         response = HttpResponse(pdf_file, content_type='application/pdf')
-#         response['Content-Disposition'] = 'filename="myfile.pdf"'
-
-#         # response['Content-Security-Policy'] = "frame-ancestors 'self';"
-
-#         return response
-#     else:
-#         return HttpResponse(status=404)
 
 def pdfView(request, Doc_ID):
     document = get_object_or_404(Document.Document, Doc_ID = Doc_ID)
@@ -170,9 +136,6 @@ def pdfView(request, Doc_ID):
     if pdf_file is not None:
         response = HttpResponse(pdf_file, content_type='application/pdf')
         response['Content-Disposition'] = 'filename="myfile.pdf"'
-
-        # response['Content-Security-Policy'] = "frame-ancestors 'self';"
-
         return response
     else:
         return HttpResponse(status=404)

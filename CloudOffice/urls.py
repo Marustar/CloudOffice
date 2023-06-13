@@ -26,11 +26,6 @@ urlpatterns = [
     path('data.html', views.data, name='data'),
     path('document.html', views.document, name='document'),
     path('index.html', views.index, name='authenticated_home'),
-    path('mail.html', views.mail, name='mail'),
-    path('sent.html', views.sent, name='sent'),
-    path('server.html', views.server, name='server'),
-    path('sns.html', views.sns, name='sns'),
-    path('popup.html', views.popup, name='popup'),
     path('viewer.html/<int:Doc_ID>/', views.viewer, name='viewer'),
     path('admin/', admin.site.urls),
     

@@ -4,7 +4,7 @@
     <h1>{{user_name}} {{user_Rank}}</h1>
     <div class="profile">
       <img
-        src="{% static 'img/face.jpg' %}"
+        src="{% static 'img/face.png' %}"
         alt="User"
         width="100"
         height="100"
@@ -44,10 +44,12 @@
     <div class="documents">
       <h2>처리 대기중 문서</h2>
       <ul>
-        {% for d in receive_document %}
-        <li><a href="viewer.html/{{d.Doc_ID}}/">{{ d }}</a></li>
-        {% endfor %} {% if not receive_document %}
-        <li class="no-documents">받은 문서가 없습니다.</li>
+        {% if wait_document|length == 1 %}
+        <li><a href="{{d.url}}">{{ wait_document.0 }}</a></li>
+        {% else %} {% for d in wait_document %}
+        <li><a href="{{d.url}}">{{ d }}</a></li>
+        {% endfor %} {% endif %} {% if not wait_document %}
+        <li class="no-documents">처리 대기중 문서가 없습니다.</li>
         {% endif %}
       </ul>
     </div>
