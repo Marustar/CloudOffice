@@ -10,6 +10,6 @@
 - pip install pdfdocument
 - pip install pdfkit
 
-알아서 작업하고 변동하항 확실하게 작성할 것
+알아서 작업하고 변동사항 확실하게 작성할 것
 
-email: honk01281@gmailcom
+email: honk01281@gmail.com
