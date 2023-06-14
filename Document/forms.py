@@ -2,6 +2,7 @@ from django import forms
 from .models import Document, File
 from Emp.models import Department, Employee
 
+
 class DocumentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DocumentForm, self).__init__(*args, **kwargs)
@@ -11,6 +12,5 @@ class DocumentForm(forms.ModelForm):
 
     class Meta:
         model = Document
-        fields = ['Doc_ID', 'Doc_Dept', 'Doc_Title', 'Doc_Sender', 'Doc_Receiver', 'Doc_Type', 'Doc_State', 'Doc_Content']
-
-
+        fields = ['Doc_ID', 'Doc_Dept', 'Doc_Title', 'Doc_Sender',
+                  'Doc_Receiver', 'Doc_Type', 'Doc_State', 'Doc_Content', 'Doc_Check']

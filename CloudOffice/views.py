@@ -46,12 +46,16 @@ def index(request):
             currentUser.Emp_Rank = "사장"
 
 
-        receiveDoc = Document.Document.objects.filter(Doc_Receiver = currentUser)
+        receiveDoc = Document.Document.objects.filter(
+            Doc_Receiver=currentUser, Doc_Check__in=[1, 2]
+        )
+        sentDoc = Document.Document.objects.filter(Doc_Sender=currentUser, Doc_Check=2)
         # print(receiveDoc[0].id)
         receiveMail = Mail.Mail.objects.filter(Mail_Receiver = currentUser)
         waitMail = Document.Document.objects.filter(Doc_Receiver = currentUser)
         return render (request, 'index.html', {
             'receive_document' : receiveDoc,
+            'sent_document': sentDoc,
             'receive_mail' : receiveMail,
             'wait_mail' : waitMail,
             'user_name': currentUser,
@@ -86,6 +90,9 @@ def document(request):
 def viewer(request, Doc_ID):
     if(request.user.is_authenticated):
         document = get_object_or_404(Document.Document, Doc_ID = Doc_ID)
+        # check = Document.Document.objects.all()
+        # check_value = check.values_list('Doc_Check', flat=True)
+        check_value = ""
         rank = document.Doc_Sender.Emp_Rank
         if(rank == 1):
             rank = "사원"
@@ -113,10 +120,35 @@ def viewer(request, Doc_ID):
             rerank = "부장"
         elif(rerank == 6):
             rerank = "사장"
-        return render(request, 'viewer.html',{"Document":document, "Rank":rank, "ReRank": rerank} )
+
+        if request.method == "POST":
+            doc_check = request.POST.get("Doc_Check")
+
+            document.Doc_Check = doc_check
+            document.save()
+
+
+            if document.Doc_Check == 1:
+                check_value = "결제 대기중"
+            elif document.Doc_Check == 2:
+                check_value = "반려"
+            elif document.Doc_Check == 3:
+                check_value = "결제 완료"
+
+            return redirect('viewer', Doc_ID=Doc_ID)  # 수정된 부분
+
+        if document.Doc_Check == 1:
+            check_value = "결제 대기중"
+        elif document.Doc_Check == 2:
+            check_value = "반려"
+        elif document.Doc_Check == 3:
+            check_value = "결제 완료"
+
+        print(check_value)
+        return render(request, 'viewer.html', {"Document": document, "Rank": rank, "ReRank": rerank, "Check_value": check_value})
     
     else:
-        return redirect ('login')
+        return redirect('login')
     
 
 

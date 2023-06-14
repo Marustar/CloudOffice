@@ -21,7 +21,9 @@
       <h2>받은 문서</h2>
       <ul>
         {% for d in receive_document %}
+        {% if d.Doc_Check != 2 and d.Doc_Check != 3 %}
         <li><a href="viewer.html/{{d.Doc_ID}}/">{{ d }}</a></li>
+        {% endif %}
         {% endfor %} {% if not receive_document %}
         <li class="no-documents">받은 문서가 없습니다.</li>
         {% endif %}
@@ -29,14 +31,13 @@
     </div>
 
     <div class="documents">
-      <h2>받은 메일</h2>
+      <h2>반려된 문서</h2>
       <ul>
-        {% if receive_mail|length == 1 %}
-        <li><a href="{{d.url}}">{{ receive_mail.0 }}</a></li>
-        {% else %} {% for d in receive_mail %}
-        <li><a href="{{d.url}}">{{ d }}</a></li>
-        {% endfor %} {% endif %} {% if not receive_mail %}
-        <li class="no-documents">받은 메일이 없습니다.</li>
+        {% for d in sent_document %}
+        <li><a href="viewer.html/{{ d.Doc_ID }}/">{{ d }}</a></li>
+        {% endfor %}
+        {% if not sent_document %}
+        <li class="no-documents">반려된 문서가 없습니다.</li>
         {% endif %}
       </ul>
     </div>

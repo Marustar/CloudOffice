@@ -7,7 +7,7 @@
     <ul>
       <li><strong>작성자:</strong> {{ Document.Doc_Sender }} {{Rank}}</li>
       <li><strong>문서번호:</strong> {{ Document.Doc_ID }}</li>
-      <li><strong>승인상태:</strong> {{ document.approval_status }}</li>
+      <li><strong>승인상태:</strong> {{ Check_value }}</li>
       <li><strong>보고일자:</strong> {{ document.reporting_date }}</li>
       <li><strong>발신부서:</strong> {{ Document.Doc_Dept }}</li>
       <li><strong>승인자:</strong> {{ Document.Doc_Receiver }} {{ReRank}}</li>
@@ -25,27 +25,12 @@
     </div>
   </div>
 
-  <!-- <div class="viewers">
-    <h3>문서 열람자</h3>
-    <ul>
-      {% for viewer in viewers %}
-        <iframe src="{% url 'pdfView' document_name='testcase.pdf' %}" width="100%" height="500px"></iframe>
-      {% endfor %}
-    </div>
-    </ul>
-  </div> -->
 
   <div class="comments">
-    <h3>한줄 평</h3>
     <form method="POST">
       {% csrf_token %}
-      <textarea
-        name="comment"
-        placeholder="Write your comment here..."
-        rows="4"
-        cols="50"
-      ></textarea>
       <br />
+      <input type="hidden" name="Doc_Check" value="2">
       <button type="submit">Submit Comment</button>
     </form>
     {% for comment in comments %}
