@@ -26,24 +26,73 @@
   </div>
 
   <div class="comments">
-    <h3>코멘트</h3>
-    <form method="POST">
-      {% csrf_token %}
-      <textarea
-        name="comment"
-        placeholder="의견 작성"
-        rows="4"
-        cols="50"
-      ></textarea>
-      <br />
-      <button type="submit">승인</button>
-    </form>
-    {% for comment in comments %}
-    <div class="comment">
-      <p>{{ comment.content }}</p>
-      <p><strong>By:</strong> {{ comment.author }}</p>
+    <button id="openModalBtn" type="submit">결재 진행</button>
+  </div>
+
+  <!-- Modal HTML -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>결재 진행</h2>
+      <form id="approvalForm">
+        <div class="form-row">
+          <div class="form-label">
+            <label for="sender">작성자:</label>
+          </div>
+          <div class="form-field">
+            <p id="sender">{{ Document.Doc_Sender }} {{Rank}}</p>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-label">
+            <label for="dept">발신부서:</label>
+          </div>
+          <div class="form-field">
+            <p id="dept">{{ Document.Doc_Dept }}</p>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-label">
+            <label for="approvalStatus">승인상태:</label>
+          </div>
+          <div class="form-field">
+            <div class="approval-status">
+              <label>
+                <input type="checkbox" name="approvalStatus" value="승인" />
+                승인
+              </label>
+              <label>
+                <input type="checkbox" name="approvalStatus" value="반려" />
+                반려
+              </label>
+              <label>
+                <input type="checkbox" name="approvalStatus" value="미승인" />
+                미승인
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-label">
+            <label for="comment">결재 의견:</label>
+          </div>
+          <div class="form-field">
+            <textarea id="comment" rows="4" cols="50"></textarea>
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="confirmBtn">
+            <span class="icon">&#10003;</span>확인
+          </button>
+          <button type="button" class="cancelBtn">
+            <span class="icon">&#10005;</span>취소
+          </button>
+        </div>
+      </form>
     </div>
-    {% endfor %}
   </div>
 </main>
+
+<script src="{% static 'js/approval.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/approval.css' %}" />
 {% endblock %}
