@@ -25,10 +25,19 @@ def document_upload(request):
     except Employee.DoesNotExist:
         return render(request, 'fileupload.html', {'form': form})  
 
-    currentUser = findUser(request)
+    currentUser = findUser(request) # 발신자 직급 표시
 
     rank_dict = {1: "사원", 2: "대리", 3: "과장", 4: "차장", 5: "부장", 6: "사장"}
     current_rank = rank_dict.get(currentUser.Emp_Rank, "")
+
+    receiver_Rank = [ # 수신자 직급 표시
+        {
+            'pk': employee.pk,
+            'Emp_Name': employee.Emp_Name,
+            'Rank': rank_dict.get(employee.Emp_Rank, ""),
+        }
+        for employee in Employee.objects.all()
+    ]
 
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -54,13 +63,12 @@ def document_upload(request):
     else:
         form = DocumentForm()
 
-    employees = Employee.objects.all()  
     context = {
         'form': form,
         'username': employee.Emp_Name, 
         'Rank': current_rank,  
         'employee': employee,
-        'employees': employees,  
+        'receiver_Rank': receiver_Rank,  
         'document_types': document_types
     }
 
@@ -72,18 +80,27 @@ def convert_ppt_to_pdf(file):
     if file_extension in ['.ppt', '.pptx']:
         document_name = file.name
         file_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
-        with open(file_path, 'wb') as temp_file:
-            for chunk in file.chunks():
-                temp_file.write(chunk)
-
         pdf_path = file_path.replace('.pptx', '.pdf')
-        convert(file_path, pdf_path)
+
+
+        try:
+            convert(file_path, pdf_path)
+            
+        except Exception as e:
+            print(e)
 
         os.remove(file_path)
 
+        with open(file_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+                
         return os.path.basename(pdf_path)
 
+        
+
     return None
+
 
 def convert_doc_to_pdf(file):
     file_extension = os.path.splitext(file.name)[1].lower()
@@ -108,7 +125,6 @@ def convert_doc_to_pdf(file):
 
 def process_file(file):
     file_extension = os.path.splitext(file.name)[1].lower()
-    
 
     if file_extension in ['.ppt', '.pptx']:
         return convert_ppt_to_pdf(file)

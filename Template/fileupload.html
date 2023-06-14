@@ -32,7 +32,7 @@
         type="text"
         id="author-name"
         name="Doc_Sender"
-        value="{{ username }} {{Rank}}"
+        value="{{ username }} {{ Rank }}"
         readonly
       /><br />
 
@@ -43,11 +43,11 @@
         value="{{ employee.pk }}"
       /><br />
 
-      <label for="receiver-id">수신자 선택</label><br />
+      <label for="receiver-id">수신자 선택:</label><br />
       <select id="receiver-id" name="Doc_Receiver">
-        {% for receiver in employees %} {% if receiver.pk != employee.pk %}
+        {% for receiver in receiver_Rank %} {% if receiver.pk != employee.pk %}
         <option value="{{ receiver.pk }}">
-          {{ receiver.Emp_Name }} {{ Rank }}
+          {{ receiver.Emp_Name }} {{ receiver.Rank }}
         </option>
         {% endif %} {% endfor %}</select
       ><br />
