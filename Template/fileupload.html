@@ -9,10 +9,8 @@
   <body>
     <h1>문서 작성</h1>
     <form method="post" enctype="multipart/form-data">
-      <!-- You may want to remove this or set this value server-side -->
       <input type="hidden" id="doc-id" name="Doc_ID" />
 
-      <!-- Set the department server-side -->
       <input
         type="hidden"
         id="doc-dept"
@@ -25,19 +23,33 @@
 
       <label for="position">문서유형:</label><br />
       <select id="doc_type" name="Doc_Type">
-        <option value="">유형 선택</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option></select
+        <option value="1">.docx</option>
+        <option value="2">.ppt</option></select
       ><br />
 
       <label for="author-name">작성자 이름:</label><br />
-      <input type="text" id="author-name" name="Doc_Sender" /><br />
+      <input
+        type="text"
+        id="author-name"
+        name="Doc_Sender"
+        value="{{ username }} {{Rank}}"
+        readonly
+      /><br />
 
-      <label for="receiver-name">수신자 이름:</label><br />
-      <input type="text" id="receiver-name" name="Doc_Receiver" /><br />
+      <input
+        type="hidden"
+        id="author-id"
+        name="Doc_Sender"
+        value="{{ employee.pk }}"
+      /><br />
 
-      <!-- Set the document state server-side -->
+      <label for="receiver-id">수신자 선택:</label><br />
+      <select id="receiver-id" name="Doc_Receiver">
+        {% for receiver in employees %} {% if receiver.pk != employee.pk %}
+        <option value="{{ receiver.pk }}">{{ receiver.Emp_Name }}</option>
+        {% endif %} {% endfor %}</select
+      ><br />
+
       <input type="hidden" id="doc-state" name="Doc_State" value="2" />
 
       <label for="document-content">문서 내용:</label><br />
@@ -46,7 +58,5 @@
       <input type="file" name="document" />
       <input type="submit" value="Upload" />
     </form>
-
-    <!-- Rest of your HTML... -->
   </body>
 </html>
