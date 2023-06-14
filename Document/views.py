@@ -89,7 +89,7 @@ def convert_ppt_to_pdf(file):
                 destination.write(chunk)
 
         if not os.path.isfile(file_path):
-            print("Error: File not found")
+            print("파일을 찾을 수 없습니다.")
             return None
 
         pdf_path = file_path.replace('.pptx', '.pdf')
