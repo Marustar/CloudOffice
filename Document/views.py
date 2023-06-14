@@ -10,6 +10,7 @@ from docx2pdf import convert
 import os
 from Emp import models as Emp
 import pythoncom
+import comtypes.client
 
 def findUser(request):
     return Emp.Employee.objects.get(Emp_User = request.user)
@@ -74,32 +75,43 @@ def document_upload(request):
 
     return render(request, 'fileupload.html', context)
 
+
+
 def convert_ppt_to_pdf(file):
     file_extension = os.path.splitext(file.name)[1].lower()
 
     if file_extension in ['.ppt', '.pptx']:
         document_name = file.name
         file_path = os.path.join(settings.BASE_DIR, 'DocumentData', document_name)
-        pdf_path = file_path.replace('.pptx', '.pdf')
-
-
-        try:
-            convert(file_path, pdf_path)
-            
-        except Exception as e:
-            print(e)
-
-        os.remove(file_path)
 
         with open(file_path, 'wb+') as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
-                
+
+        if not os.path.isfile(file_path):
+            print("Error: File not found")
+            return None
+
+        pdf_path = file_path.replace('.pptx', '.pdf')
+
+        powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
+        powerpoint.Visible = 1
+
+        if file_extension == '.ppt':
+            ppt = powerpoint.Presentations.Open(file_path)
+        else:
+            ppt = powerpoint.Presentations.Open2007(file_path)
+            
+        ppt.ExportAsFixedFormat(pdf_path, 2)
+        ppt.Close()
+        powerpoint.Quit()
+
+        os.remove(file_path)
+
         return os.path.basename(pdf_path)
 
-        
-
     return None
+
 
 
 def convert_doc_to_pdf(file):
