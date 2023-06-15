@@ -186,8 +186,10 @@ def viewer(request, Doc_ID):
 
         if request.method == "POST":
             doc_check = request.POST.get("Doc_Check")
+            doc_comment = request.POST.get("Doc_Comment")
 
             document.Doc_Check = doc_check
+            document.Doc_Comment = doc_comment
             document.save()
 
 
@@ -272,7 +274,3 @@ def upload_document(request):
             success_page_url = '/testcase/?success_page=true'
             return HttpResponseRedirect(success_page_url)
     return render(request, 'fileupload.html')
-
-
-
-

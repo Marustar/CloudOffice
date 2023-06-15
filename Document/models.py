@@ -1,3 +1,4 @@
+
 from django.db import models
 from Emp.models import Employee, Department
 
@@ -23,6 +24,7 @@ class Document(models.Model):
     Doc_Content = models.TextField(default="")
     Doc_Check = models.IntegerField(null=True)
     Doc_Time = models.DateTimeField(auto_now_add=True, null=True)
+    Doc_Comment = models.TextField(max_length=300, null=True)
 
     def __str__(self):
         return self.Doc_Title
