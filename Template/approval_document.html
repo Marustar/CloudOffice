@@ -1,0 +1,81 @@
+{% extends 'base.html' %}{% load static %}{% block content %}
+<main>
+  <div class="container">
+    <div class="sidebar">
+      <ul>
+        <li>
+          <a href="upload/document_upload">
+            <span class="material-icons">upload_file</span>
+            <span class="text">새 결재 진행</span>
+          </a>
+        </li>
+        <li>
+          <a href="document.html"
+            ><span class="material-icons">pending</span
+            ><span class="text">처리 대기 문서</span></a
+          >
+        </li>
+        <li>
+          <a href="reject_document.html"
+            ><span class="material-icons">check_circle_outline</span
+            ><span class="text">반려된 문서</span></a
+          >
+        </li>
+        <li>
+          <a href="approval_document.html"
+            ><span class="material-icons">save</span
+            ><span class="text">결재 완료 문서</span></a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <h1>결재 완료 문서</h1>
+      <br/>
+      <table>
+        <thead>
+          <tr>
+            <th>문서 번호</th>
+            <th>보고일자</th>
+            <th>문서명</th>
+            <th>수신(발신)부서</th>
+            <th>보고자</th>
+            <th>검토자</th>
+            <th>결재여부</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for document in page_obj %}
+          <tr>
+            <td>{{ document.Doc_ID }}</td>
+            <td>{{ document.Doc_Time }}</td>
+            <td>
+              <a href="viewer.html/{{ document.Doc_ID }}/">{{ document }}</a>
+            </td>
+            <td>{{ document.Doc_Dept }}</td>
+            <td>{{ document.Doc_Sender }}</td>
+            <td>{{ document.Doc_Receiver }}</td>
+            <td>{{ document.Check_Value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %} {% for num in page_obj.paginator.page_range %} {% if num == page_obj.number %}
+        <a href="?page={{ num }}" class="active">{{ num }}</a>
+        {% else %}
+        <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %} {% endfor %} {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+      </div>
+
+      <span
+        >Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span
+      >
+    </div>
+  </div>
+</main>
+{% endblock %}
