@@ -26,9 +26,9 @@
       </nav>
       <div class="header-login">
         {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Log out</a>
+        <a href="{% url 'logout' %}">로그아웃</a>
         {% else %}
-        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'login' %}">로그인</a>
         {% endif %}
       </div>
     </header>
@@ -39,12 +39,4 @@
   </body>
 </html>
 
-<script>
-  window.addEventListener('scroll', function () {
-    const header = document.querySelector('header');
-    header.classList.toggle('scrolled', window.scrollY > 0);
-  });
-  function openPopup(url) {
-    window.open(url, 'Popup Window', 'width=800,height=600');
-  }
-</script>
+

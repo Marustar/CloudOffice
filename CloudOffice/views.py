@@ -91,11 +91,11 @@ def document(request):
 
         for doc in page_obj:
             if doc.Doc_Check == 1:
-                check_value = "결제 대기중"
+                check_value = "결재 대기중"
             elif doc.Doc_Check == 2:
                 check_value = "반려"
             elif doc.Doc_Check == 3:
-                check_value = "결제 승인"
+                check_value = "결재 승인"
             doc.Check_Value = check_value
 
         return render(request, 'document.html', {'page_obj': page_obj})
@@ -116,11 +116,11 @@ def reject(request):
 
         for doc in page_obj:
             if doc.Doc_Check == 1:
-                check_value = "결제 대기중"
+                check_value = "결재 대기중"
             elif doc.Doc_Check == 2:
                 check_value = "반려"
             elif doc.Doc_Check == 3:
-                check_value = "결제 승인"
+                check_value = "결재 승인"
             doc.Check_Value = check_value
 
         return render(request, 'reject_document.html', {'page_obj': page_obj})
@@ -146,7 +146,7 @@ def approval(request):
             elif doc.Doc_Check == 2:
                 doc.Check_Value = "반려"
             elif doc.Doc_Check == 3:
-                doc.Check_Value = "결제 승인"
+                doc.Check_Value = "결재 승인"
 
         return render(request, 'approval_document.html', {'page_obj': page_obj})
     else:
@@ -192,20 +192,20 @@ def viewer(request, Doc_ID):
 
 
             if document.Doc_Check == 1:
-                check_value = "결제 대기중"
+                check_value = "결재 대기중"
             elif document.Doc_Check == 2:
                 check_value = "반려"
             elif document.Doc_Check == 3:
-                check_value = "결제 완료"
+                check_value = "결재 완료"
 
             return redirect('authenticated_home')
 
         if document.Doc_Check == 1:
-            check_value = "결제 대기중"
+            check_value = "결재 대기중"
         elif document.Doc_Check == 2:
             check_value = "반려"
         elif document.Doc_Check == 3:
-            check_value = "결제 완료"
+            check_value = "결재 완료"
 
         print(check_value)
         return render(request, 'viewer.html', {"Document": document, "Rank": rank, "ReRank": rerank, "Check_value": check_value})

@@ -1,6 +1,5 @@
 from django.db import models
 from Emp.models import Employee, Department
-from django.utils import timezone
 
 class File(models.Model):
     File_Name = models.CharField(max_length=100)

@@ -11,9 +11,9 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(UserCreationForm):
-    username = forms.CharField(max_length=30, required=True, label='Username')
-    email = forms.EmailField(max_length=254, required=True, label='Email')
-    Emp_Name = forms.CharField(max_length=10, required=True, label='Employee Name')
+    username = forms.CharField(max_length=30, required=True, label='아이디')
+    email = forms.EmailField(max_length=254, required=True, label='이메일')
+    Emp_Name = forms.CharField(max_length=10, required=True, label='사원 이름')
     class Meta:
         model = User
         fields = ('username', 'email', 'Emp_Name','password1', 'password2')
