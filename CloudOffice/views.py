@@ -198,7 +198,7 @@ def viewer(request, Doc_ID):
             elif document.Doc_Check == 3:
                 check_value = "결제 완료"
 
-            return redirect('viewer', Doc_ID=Doc_ID)  # 수정된 부분
+            return redirect('authenticated_home')
 
         if document.Doc_Check == 1:
             check_value = "결제 대기중"
