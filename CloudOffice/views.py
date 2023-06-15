@@ -16,6 +16,7 @@ from Mail import models as Mail
 from Emp import models as Emp
 from Document.models import File
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 @login_required
 def findUser(request):
@@ -80,10 +81,18 @@ def data(request):
         return redirect ('login')
 
 def document(request):
-    if(request.user.is_authenticated):
-        return render(request, 'document.html')
+    if request.user.is_authenticated:
+        currentUser = findUser(request)
+        receiveDoc = Document.Document.objects.filter(Doc_Receiver=currentUser)
+
+        paginator = Paginator(receiveDoc, 3)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'document.html', {'page_obj': page_obj})
     else:
-        return redirect ('login')
+        return redirect('login')
 
 
     
