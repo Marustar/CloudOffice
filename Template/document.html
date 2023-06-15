@@ -64,7 +64,7 @@
           {% for document in page_obj %}
           <tr>
             <td>{{ document.Doc_ID }}</td>
-            <td>{{ 보고일자 }}</td>
+            <td>{{ document.Doc_Time2 }}</td>
             <td>
               <a href="viewer.html/{{ document.Doc_ID }}/">{{ document }}</a>
             </td>
@@ -79,23 +79,18 @@
       <div class="pagination">
         {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-        {% endif %} 
-      
-        {% for num in page_obj.paginator.page_range %}
-          {% if num == page_obj.number %}
-            <a href="?page={{ num }}" class="active">{{ num }}</a>
-          {% else %}
-            <a href="?page={{ num }}">{{ num }}</a>
-          {% endif %}
-        {% endfor %}
-      
-        {% if page_obj.has_next %}
+        {% endif %} {% for num in page_obj.paginator.page_range %} {% if num == page_obj.number %}
+        <a href="?page={{ num }}" class="active">{{ num }}</a>
+        {% else %}
+        <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %} {% endfor %} {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}">Next</a>
         {% endif %}
       </div>
-      
-      <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-      
+
+      <span
+        >Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span
+      >
     </div>
   </div>
 </main>
