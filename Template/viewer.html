@@ -1,16 +1,17 @@
-{% extends 'base.html' %} {% load static %}{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <main>
   <h1>문서 상세정보</h1>
 
   <div class="document-info">
     <h2></h2>
     <ul>
-      <li><strong>작성자:</strong> {{ Document.Doc_Sender }} {{Rank}}</li>
-      <li><strong>문서번호:</strong> {{ Document.Doc_ID }}</li>
-      <li><strong>승인상태:</strong> {{ Check_value }}</li>
+      <li><strong>작성자 :</strong> {{ Document.Doc_Sender }} {{Rank}}</li>
+      <li><strong>문서번호 :</strong> {{ Document.Doc_ID }}</li>
+      <li><strong>승인상태 :</strong> {{ Check_value }}</li>
       <li><strong>보고일자:</strong> {{ Document.Doc_Time }} </li>
-      <li><strong>발신부서:</strong> {{ Document.Doc_Dept }}</li>
-      <li><strong>승인자:</strong> {{ Document.Doc_Receiver }} {{ReRank}}</li>
+      <li><strong>발신부서 :</strong> {{ Document.Doc_Dept }}</li>
+      <li><strong>승인자 :</strong> {{ Document.Doc_Receiver }} {{ReRank}}</li>
+      <li><strong>결재 의견 :</strong> {{ Document.Doc_Content }}</li>
     </ul>
   </div>
 
@@ -25,19 +26,72 @@
     </div>
   </div>
 
-  <div class="comments">
-    <form method="POST">
-      {% csrf_token %}
-      <br />
-      <input type="hidden" name="Doc_Check" value="2" />
-      <button type="submit">Submit Comment</button>
-    </form>
-    {% for comment in comments %}
-    <div class="comment">
-      <p>{{ comment.content }}</p>
-      <p><strong>By:</strong> {{ comment.author }}</p>
+  
+<button id="paymentButton"{% if Check_value == "반려" or Check_value == "결재 완료" %}style="display: none;"{% endif %}>결재하기</button>
+
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModalButton" class="close">&times;</span>
+      <h2>결재</h2>
+
+      <form id="paymentForm" method="POST">
+        {% csrf_token %}
+        <br />
+        <div>
+          <label for="approverName">
+            승인자:
+            <span>{{ Document.Doc_Receiver }} {{ ReRank }}</span>
+          </label>
+        </div>
+        <div class="approval-status">
+          <span class="approval-status-text">결재 상태:</span>
+          <label for="rejectCheckbox">
+            <input
+              type="radio"
+              id="rejectCheckbox"
+              name="Doc_Check"
+              value="2"
+            />
+            반려하기
+          </label>
+          <label for="approveCheckbox">
+            <input
+              type="radio"
+              id="approveCheckbox"
+              name="Doc_Check"
+              value="3"
+            />
+            결재하기
+          </label>
+        </div>
+
+        <div>
+          <label for="paymentComment"> 결재 의견: </label>
+          <textarea
+            id="paymentComment"
+            name="payment_comment"
+            placeholder="여기에 의견을 입력하세요."
+            required
+          ></textarea>
+        </div>
+        <br />
+      </form>
+      <button type="submit" id="confirmButton">확인</button>
+      <button type="cancel" id="cancelModalButton">취소</button>
+      {% for comment in comments %}
+      <div class="comment">
+        <p>{{ comment.content }}</p>
+        <p><strong>By:</strong> {{ comment.author }}</p>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </main>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+  rel="stylesheet"
+/>
+<script src="{% static 'js/approval.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/approval.css' %}" />
 {% endblock %}

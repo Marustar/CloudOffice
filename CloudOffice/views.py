@@ -17,6 +17,7 @@ from Emp import models as Emp
 from Document.models import File
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 @login_required
 def findUser(request):
@@ -48,17 +49,21 @@ def index(request):
 
 
         receiveDoc = Document.Document.objects.filter(
-            Doc_Receiver=currentUser, Doc_Check__in=[1, 2]
+            Doc_Receiver=currentUser, Doc_Check = 1
         )
         sentDoc = Document.Document.objects.filter(Doc_Sender=currentUser, Doc_Check=2)
-        # print(receiveDoc[0].id)
         receiveMail = Mail.Mail.objects.filter(Mail_Receiver = currentUser)
         waitMail = Document.Document.objects.filter(Doc_Receiver = currentUser)
+        wait_document = Document.Document.objects.filter(
+            Q(Doc_Sender=currentUser) | Q(Doc_Receiver=currentUser),
+            Doc_Check=3
+        )
         return render (request, 'index.html', {
             'receive_document' : receiveDoc,
             'sent_document': sentDoc,
             'receive_mail' : receiveMail,
             'wait_mail' : waitMail,
+            'wait_document': wait_document,
             'user_name': currentUser,
             "user_Rank": currentUser.Emp_Rank,
 
@@ -66,13 +71,6 @@ def index(request):
     else:
         return redirect ('login')
 
-    
-
-def approval(request):
-    if(request.user.is_authenticated):
-        return render(request, 'approval.html')
-    else:
-        return redirect ('login')
     
 def data(request):
     if(request.user.is_authenticated):
@@ -83,24 +81,80 @@ def data(request):
 def document(request):
     if request.user.is_authenticated:
         currentUser = findUser(request)
-        receiveDoc = Document.Document.objects.filter(Doc_Receiver=currentUser)
-
+        receiveDoc = Document.Document.objects.filter(Doc_Receiver=currentUser, Doc_Check = 1)
         paginator = Paginator(receiveDoc, 3)
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
+        check_value = ""
+
+        for doc in page_obj:
+            if doc.Doc_Check == 1:
+                check_value = "결제 대기중"
+            elif doc.Doc_Check == 2:
+                check_value = "반려"
+            elif doc.Doc_Check == 3:
+                check_value = "결제 승인"
+            doc.Check_Value = check_value
+
         return render(request, 'document.html', {'page_obj': page_obj})
     else:
         return redirect('login')
+    
 
+def reject(request):
+    if request.user.is_authenticated:
+        currentUser = findUser(request)
+        receiveDoc = Document.Document.objects.filter(Doc_Sender=currentUser, Doc_Check=2)
+        paginator = Paginator(receiveDoc, 3)
 
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        check_value = ""
+
+        for doc in page_obj:
+            if doc.Doc_Check == 1:
+                check_value = "결제 대기중"
+            elif doc.Doc_Check == 2:
+                check_value = "반려"
+            elif doc.Doc_Check == 3:
+                check_value = "결제 승인"
+            doc.Check_Value = check_value
+
+        return render(request, 'reject_document.html', {'page_obj': page_obj})
+    else:
+        return redirect('login')
+    
+
+def approval(request):
+    if request.user.is_authenticated:
+        currentUser = findUser(request)
+        receiveDoc = Document.Document.objects.filter(
+            Q(Doc_Sender=currentUser) | Q(Doc_Receiver=currentUser),
+            Doc_Check=3
+        )
+        paginator = Paginator(receiveDoc, 3)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        for doc in page_obj:
+            if doc.Doc_Check == 1:
+                doc.Check_Value = "결재 대기중"
+            elif doc.Doc_Check == 2:
+                doc.Check_Value = "반려"
+            elif doc.Doc_Check == 3:
+                doc.Check_Value = "결제 승인"
+
+        return render(request, 'approval_document.html', {'page_obj': page_obj})
+    else:
+        return redirect('login')
     
 def viewer(request, Doc_ID):
     if(request.user.is_authenticated):
         document = get_object_or_404(Document.Document, Doc_ID = Doc_ID)
-        # check = Document.Document.objects.all()
-        # check_value = check.values_list('Doc_Check', flat=True)
         check_value = ""
         rank = document.Doc_Sender.Emp_Rank
         if(rank == 1):

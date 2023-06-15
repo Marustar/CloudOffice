@@ -64,7 +64,14 @@
       <textarea id="document-content" name="Doc_Content"></textarea><br />
       {% csrf_token %}
       <input type="file" name="document" />
-      <input type="submit" value="Upload" />
+      <input type="submit" value="Upload" id="upload-button"/>
     </form>
+    <script>
+      document.getElementById('upload-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        event.target.form.submit();
+        alert('업로드 완료');
+      });
+    </script>
   </body>
 </html>

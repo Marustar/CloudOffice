@@ -22,18 +22,17 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('approval.html', views.approval, name='approval'),
     path('data.html', views.data, name='data'),
     path('document.html', views.document, name='document'),
+    path('approval_document.html', views.approval, name='approval'),
+    path('reject_document.html', views.reject, name='reject'),
     path('index.html', views.index, name='authenticated_home'),
     path('viewer.html/<int:Doc_ID>/', views.viewer, name='viewer'),
     path('admin/', admin.site.urls),
     
     path('pdf/<int:Doc_ID>/', views.pdfView, name='pdfView'),
     path('api/auth/', include('authentication.urls')),
-    # path('testcase/', views.upload_document, name='upload_document'),
 
     path('auth/', include('authentication.urls')),
-    #path('send-email/', SendEmailView.as_view(), name='send-email'),
-    path('upload/', include('Document.urls')),  # 'Document' is the name of your app
+    path('upload/', include('Document.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
