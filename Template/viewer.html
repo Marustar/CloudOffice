@@ -5,6 +5,7 @@
   <div class="document-info">
     <h2></h2>
     <ul>
+      <li><strong>문서명 :</strong> {{ Document.Doc_Title }}</li>
       <li><strong>작성자 :</strong> {{ Document.Doc_Sender }} {{Rank}}</li>
       <li><strong>문서번호 :</strong> {{ Document.Doc_ID }}</li>
       <li><strong>승인상태 :</strong> {{ Check_value }}</li>
@@ -14,6 +15,10 @@
       <li><strong>결재 의견 :</strong> {{ Document.Doc_Content }}</li>
       {% if Check_value == "반려" %}
       <li><strong>반려 사유 :</strong> {{ Document.Doc_Comment }}</li>
+      {% endif %}
+
+      {% if Check_value == "결재 완료" %}
+      <li><strong>기타 의견 :</strong> {{ Document.Doc_Comment }}</li>
       {% endif %}
     </ul>
   </div>
