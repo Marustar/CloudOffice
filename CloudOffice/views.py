@@ -132,6 +132,10 @@ def reject(request):
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        doc_type = request.GET.get("doc_type")
+
+        if doc_type:
+            receiveDoc = receiveDoc.filter(Doc_Type = doc_type)
 
         check_value = ""
 
@@ -143,6 +147,21 @@ def reject(request):
             elif doc.Doc_Check == 3:
                 check_value = "결재 승인"
             doc.Check_Value = check_value
+
+            if doc.Doc_Type == 1:
+                doc.Doc_Type_String = "품의서"
+            elif doc.Doc_Type == 2:
+                doc.Doc_Type_String = "지출결의서"
+            elif doc.Doc_Type == 3:
+                doc.Doc_Type_String = "세금계산서"
+            elif doc.Doc_Type == 4:
+                doc.Doc_Type_String = "전표"
+            elif doc.Doc_Type == 5:
+                doc.Doc_Type_String = "기안서"
+            elif doc.Doc_Type == 6:
+                doc.Doc_Type_String = "제안서"
+            elif doc.Doc_Type == 7:
+                doc.Doc_Type_String = "보고서"
 
         return render(request, 'reject_document.html', {'page_obj': page_obj})
     else:
@@ -160,6 +179,10 @@ def approval(request):
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        doc_type = request.GET.get("doc_type")
+
+        if doc_type:
+            receiveDoc = receiveDoc.filter(Doc_Type = doc_type)
 
         for doc in page_obj:
             if doc.Doc_Check == 1:
@@ -168,6 +191,21 @@ def approval(request):
                 doc.Check_Value = "반려"
             elif doc.Doc_Check == 3:
                 doc.Check_Value = "결재 승인"
+
+            if doc.Doc_Type == 1:
+                doc.Doc_Type_String = "품의서"
+            elif doc.Doc_Type == 2:
+                doc.Doc_Type_String = "지출결의서"
+            elif doc.Doc_Type == 3:
+                doc.Doc_Type_String = "세금계산서"
+            elif doc.Doc_Type == 4:
+                doc.Doc_Type_String = "전표"
+            elif doc.Doc_Type == 5:
+                doc.Doc_Type_String = "기안서"
+            elif doc.Doc_Type == 6:
+                doc.Doc_Type_String = "제안서"
+            elif doc.Doc_Type == 7:
+                doc.Doc_Type_String = "보고서"
 
         return render(request, 'approval_document.html', {'page_obj': page_obj})
     else:

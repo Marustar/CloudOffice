@@ -38,6 +38,7 @@
             <th>문서 번호</th>
             <th>보고일자</th>
             <th>문서명</th>
+            <th>문서 유형</th>
             <th>수신(발신)부서</th>
             <th>보고자</th>
             <th>검토자</th>
@@ -52,6 +53,7 @@
             <td>
               <a href="viewer.html/{{ document.Doc_ID }}/">{{ document }}</a>
             </td>
+            <td>{{ document.Doc_Type_String }}</td>
             <td>{{ document.Doc_Dept }}</td>
             <td>{{ document.Doc_Sender }}</td>
             <td>{{ document.Doc_Receiver }}</td>
