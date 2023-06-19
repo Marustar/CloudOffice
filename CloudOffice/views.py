@@ -86,6 +86,10 @@ def document(request):
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        doc_type = request.GET.get("doc_type")
+
+        if doc_type:
+            receiveDoc = receiveDoc.filter(Doc_Type = doc_type)
 
         check_value = ""
 
@@ -97,6 +101,23 @@ def document(request):
             elif doc.Doc_Check == 3:
                 check_value = "결재 승인"
             doc.Check_Value = check_value
+
+
+            if doc.Doc_Type == 1:
+                doc.Doc_Type_String = "품의서"
+            elif doc.Doc_Type == 2:
+                doc.Doc_Type_String = "지출결의서"
+            elif doc.Doc_Type == 3:
+                doc.Doc_Type_String = "세금계산서"
+            elif doc.Doc_Type == 4:
+                doc.Doc_Type_String = "전표"
+            elif doc.Doc_Type == 5:
+                doc.Doc_Type_String = "기안서"
+            elif doc.Doc_Type == 6:
+                doc.Doc_Type_String = "제안서"
+            elif doc.Doc_Type == 7:
+                doc.Doc_Type_String = "보고서"
+                
 
         return render(request, 'document.html', {'page_obj': page_obj})
     else:
@@ -183,6 +204,28 @@ def viewer(request, Doc_ID):
             rerank = "부장"
         elif(rerank == 6):
             rerank = "사장"
+        
+        doc_type = document.Doc_Type
+
+
+    
+        if doc_type == 1:
+           doc_type = "품의서"
+        elif doc_type == 2:
+            doc_type = "지출결의서"
+        elif doc_type == 3:
+            doc_type = "세금계산서"
+        elif doc_type == 4:
+            doc_type = "전표"
+        elif doc_type == 5:
+            doc_type = "기안서"
+        elif doc_type == 6:
+            doc_type = "제안서"
+        elif doc_type == 7:
+           doc_type= "보고서"
+
+
+
 
         if request.method == "POST":
             doc_check = request.POST.get("Doc_Check")
@@ -210,7 +253,7 @@ def viewer(request, Doc_ID):
             check_value = "결재 완료"
 
         print(check_value)
-        return render(request, 'viewer.html', {"Document": document, "Rank": rank, "ReRank": rerank, "Check_value": check_value})
+        return render(request, 'viewer.html', {"Document": document, "Rank": rank, "ReRank": rerank, "Check_value": check_value, 'Doc_Type': doc_type})
     
     else:
         return redirect('login')
