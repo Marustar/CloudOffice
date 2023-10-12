@@ -102,7 +102,8 @@ body {
 }
 
 #approveCheckbox,
-#rejectCheckbox {
+#rejectCheckbox,
+#reapproveCheckbox {
   display: inline-flex;
   align-items: center;
   margin-right: 20px;

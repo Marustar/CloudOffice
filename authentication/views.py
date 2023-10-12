@@ -5,7 +5,8 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.views import LoginView as DjangoLoginView, LogoutView as DjangoLogoutView
 from django.views import View
 from Emp.models import Employee, Department
-from django.contrib import messages 
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 class LoginView(DjangoLoginView):
     permission_classes = (permissions.AllowAny,)
@@ -19,15 +20,23 @@ class LoginView(DjangoLoginView):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return redirect('authenticated_home')
-            else:
+            try:
+                tuser = User.objects.get(username = form.cleaned_data['username'])
+                employee = Employee.objects.get(Emp_User = tuser)
+                if employee is not None:
+                    if employee.is_approved == False:
+                        form.add_error(None, '승인되지 않은 계정입니다.')
+                        return render(request, 'login.html', {'form': form})
+
+                if user is not None:
+                    login(request, user)
+                    return redirect('authenticated_home')
+                else:
+                    form.add_error(None, '유효하지 않은 닉네임이나 패스워드입니.')
+                    return render(request, 'login.html', {'form': form})
+            except:
                 form.add_error(None, '유효하지 않은 닉네임이나 패스워드입니다.')
                 return render(request, 'login.html', {'form': form})
-        else:
-            form.add_error(None, '유효하지 않은 닉네임이나 패스워드입니다.')
-            return render(request, 'login.html', {'form': form})
             
 def index(request):
     return render(request, 'index.html')

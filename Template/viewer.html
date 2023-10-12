@@ -72,6 +72,22 @@
             />
             결재하기
           </label>
+          <label for="reportCheckbox">
+            <input
+              type="radio"
+              id="reportCheckbox"
+              name="Doc_Check"
+              value="4"
+            />
+            보고하기
+          </label>
+          <select id="receiver-id" name="Doc_Receiver">
+            {% for receiver in receiver_Rank %} {% if receiver.pk != employee.pk %}
+            <option value="{{ receiver.pk }}">
+              {{ receiver.Emp_Name }} {{ receiver.Rank }}
+            </option>
+            {% endif %} {% endfor %}</select
+          ><br />
         </div>
 
         <div>
@@ -83,6 +99,7 @@
             required
           ></textarea>
         </div>
+        
         <br />
       </form>
       <button type="submit" id="confirmButton">확인</button>

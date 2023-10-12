@@ -18,6 +18,8 @@ from Document.models import File
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
+from Emp.models import Employee
+from Document.forms import DocumentForm
 
 @login_required
 def findUser(request):
@@ -213,6 +215,25 @@ def approval(request):
     
 def viewer(request, Doc_ID):
     if(request.user.is_authenticated):
+        
+        user = request.user
+        form = DocumentForm
+        try:
+            employee = Employee.objects.get(Emp_User=user)
+        except Employee.DoesNotExist:
+            return render(request, 'fileupload.html', {'form': form})
+        currentUser = findUser(request)
+        rank_dict = {1: "사원", 2: "대리", 3: "과장", 4: "차장", 5: "부장", 6: "사장"}
+        receiver_Rank = [ # 수신자 직급 표시
+        {
+            'pk': employee.pk,
+            'Emp_Name': employee.Emp_Name,
+            'Rank': rank_dict.get(employee.Emp_Rank, ""),
+        }
+        for employee in Employee.objects.all()
+    ]
+        
+        current_rank = rank_dict.get(currentUser.Emp_Rank, "")
         document = get_object_or_404(Document.Document, Doc_ID = Doc_ID)
         check_value = ""
         rank = document.Doc_Sender.Emp_Rank
@@ -228,6 +249,8 @@ def viewer(request, Doc_ID):
             rank = "부장"
         elif(rank == 6):
             rank = "사장"
+            
+        print(rank)
             
         rerank = document.Doc_Receiver.Emp_Rank
         if(rerank == 1):
@@ -268,10 +291,21 @@ def viewer(request, Doc_ID):
         if request.method == "POST":
             doc_check = request.POST.get("Doc_Check")
             doc_comment = request.POST.get("Doc_Comment")
-
-            document.Doc_Check = doc_check
-            document.Doc_Comment = doc_comment
+            if doc_check == '4':
+                document.Doc_Check =3
+                print((request.POST.get('Doc_Receiver')))
+                tuser = Employee.objects.get(id = request.POST.get('Doc_Receiver'))
+                
+                newDoc = Document.Document.objects.create(Doc_Title= document.Doc_Title, Doc_Type = document.Doc_Type, Doc_Sender = currentUser , Doc_Check = 1 , Doc_Time = document.Doc_Time, Doc_Dept = document.Doc_Dept, Doc_Receiver = tuser, Doc_Content = document.Doc_Content, Doc_Comment = document.Doc_Comment, Doc_State = document.Doc_State, Doc_Files = document.Doc_Files)
+                
+                
+                newDoc.save()
+                                
+            else:    
+                document.Doc_Check = doc_check
+                document.Doc_Comment = doc_comment
             document.save()
+
 
 
             if document.Doc_Check == 1:
@@ -291,7 +325,7 @@ def viewer(request, Doc_ID):
             check_value = "결재 완료"
 
         print(check_value)
-        return render(request, 'viewer.html', {"Document": document, "Rank": rank, "ReRank": rerank, "Check_value": check_value, 'Doc_Type': doc_type})
+        return render(request, 'viewer.html', {"Document": document, "Rank": rank, "ReRank": rerank, "Check_value": check_value, 'Doc_Type': doc_type, 'form': form, 'username': employee.Emp_Name, 'employee': employee, 'receiver_Rank': receiver_Rank})
     
     else:
         return redirect('login')
