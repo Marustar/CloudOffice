@@ -182,6 +182,7 @@ footer {
 
 .form-group {
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .form-group label {
@@ -189,6 +190,7 @@ footer {
   font-weight: 500;
   display: block;
   margin-bottom: 5px;
+  color: #333;
 }
 
 .form-group input {
@@ -196,15 +198,20 @@ footer {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 button[type='submit'] {
   background-color: #0077cc;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
 }
 
 button[type='submit']:hover {
@@ -220,15 +227,18 @@ button[type='submit']:hover {
 }
 
 .signup {
-  margin: 2rem auto;
-  max-width: 600px;
-  padding: 2rem;
-  border: 1px solid #ccc;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
 }
 
 .signup h2 {
-  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .signup form {
@@ -329,6 +339,7 @@ header .menu {
 header .menu li {
   list-style: none;
   margin-right: 1rem;
+  padding-left: 0.5rem;
 }
 
 header .menu li:last-child {
@@ -343,6 +354,27 @@ header .menu a {
 header .menu a:hover {
   text-decoration: underline;
 }
+
+.header-nav ul {
+  display: flex;
+  justify-content: flex-start; /* 요소를 왼쪽으로 정렬 */
+  padding: 0; /* 리스트 패딩 제거 */
+}
+
+.header-nav ul li {
+  margin-right: 1rem;
+  padding-left: 1rem; /* 왼쪽 패딩 추가 */
+}
+
+.header-nav ul li:first-child {
+  margin-left: -165px; /* 첫 번째 요소의 왼쪽 여백 제거 */
+  padding-left: 0; /* 첫 번째 요소에 대한 패딩 제거 */
+}
+
+.header-nav ul li:last-child {
+  margin-right: 0; /* 마지막 요소의 오른쪽 여백 제거 */
+}
+
 
 main {
   max-width: 100%;
@@ -451,46 +483,48 @@ footer p {
 
 table {
   width: 100%;
+  margin: 20px 0;
   border-collapse: collapse;
+  font-size: 16px;
 }
 
-table th,
-table td {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ccc;
+th,
+td {
+  padding: 12px 20px;
+  text-align: left;
 }
 
-table th {
-  background-color: #f5f5f5;
+th {
+  background-color: #333;
+  color: white;
+  font-weight: bold;
 }
 
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
+tbody tr {
+  background-color: #f7f7f7;
 }
 
-table tr:hover {
-  background-color: #ddd;
+tbody tr:nth-child(even) {
+  background-color: #e9e9e9;
 }
 
-.pagination {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.pagination span {
-  margin-right: 10px;
+tbody tr:hover {
+  background-color: #dcdcdc;
 }
 
 .pagination a {
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: #f5f5f5;
   color: #333;
-  border-radius: 5px;
+  float: left;
+  padding: 8px 16px;
   text-decoration: none;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #333;
+  color: white;
+  border: 1px solid #333;
 }
 
 .pagination a:hover {
@@ -505,7 +539,7 @@ table tr:hover {
   width: 32%;
   margin-top: 5%;
   margin-right: 3%;
-  margin-left: 7%;
+  margin-left: 10%;
   text-align: center;
 }
 
@@ -594,14 +628,15 @@ table tr:hover {
 
 .main-right {
   float: right;
-  width: 49%;
+  width: 40%;
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
 }
 
 .documents {
-  width: 800px;
+  float: center;
+  width: 700px;
   height: 300px;
   margin-bottom: 30px;
   background-color: #ffffff;
@@ -710,17 +745,6 @@ hr {
   margin: 20px 0;
 }
 
-button {
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-
 button:hover {
   background-color: #3e8e41;
 }
@@ -756,4 +780,51 @@ button:hover {
   height: 100%;
   color: red;
   font-size: 24px;
+}
+
+#paymentButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#paymentButton:hover {
+  background-color: #45a049;
+}
+
+#confirmButton,
+#cancelModalButton {
+  display: inline-block;
+  width: 50%;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 16px; /* Adjust the font size for both buttons */
+}
+
+#confirmButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+#confirmButton:hover {
+  background-color: #45a049;
+}
+
+#cancelModalButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+#cancelModalButton:hover {
+  background-color: #da4331;
 }

@@ -90,6 +90,19 @@ def document(request):
         page_obj = paginator.get_page(page_number)
         doc_type = request.GET.get("doc_type")
 
+        if(currentUser.Emp_Rank == 1):
+            currentUser.Emp_Rank = "사원"
+        elif(currentUser.Emp_Rank == 2):
+            currentUser.Emp_Rank = "대리"
+        elif(currentUser.Emp_Rank == 3):
+            currentUser.Emp_Rank = "과장"
+        elif(currentUser.Emp_Rank == 4):
+            currentUser.Emp_Rank = "차장"
+        elif(currentUser.Emp_Rank == 5):
+            currentUser.Emp_Rank = "부장"
+        elif(currentUser.Emp_Rank == 6):
+            currentUser.Emp_Rank = "사장"
+
         if doc_type:
             receiveDoc = receiveDoc.filter(Doc_Type = doc_type)
 
@@ -121,7 +134,12 @@ def document(request):
                 doc.Doc_Type_String = "보고서"
                 
 
-        return render(request, 'document.html', {'page_obj': page_obj})
+        return render(request, 'document.html', {
+            'page_obj': page_obj,
+            'user_name': currentUser,
+            "user_Rank": currentUser.Emp_Rank,
+            
+            })
     else:
         return redirect('login')
     
@@ -140,6 +158,19 @@ def reject(request):
             receiveDoc = receiveDoc.filter(Doc_Type = doc_type)
 
         check_value = ""
+
+        if(currentUser.Emp_Rank == 1):
+            currentUser.Emp_Rank = "사원"
+        elif(currentUser.Emp_Rank == 2):
+            currentUser.Emp_Rank = "대리"
+        elif(currentUser.Emp_Rank == 3):
+            currentUser.Emp_Rank = "과장"
+        elif(currentUser.Emp_Rank == 4):
+            currentUser.Emp_Rank = "차장"
+        elif(currentUser.Emp_Rank == 5):
+            currentUser.Emp_Rank = "부장"
+        elif(currentUser.Emp_Rank == 6):
+            currentUser.Emp_Rank = "사장"
 
         for doc in page_obj:
             if doc.Doc_Check == 1:
@@ -165,7 +196,8 @@ def reject(request):
             elif doc.Doc_Type == 7:
                 doc.Doc_Type_String = "보고서"
 
-        return render(request, 'reject_document.html', {'page_obj': page_obj})
+        return render(request, 'reject_document.html', {'page_obj': page_obj, 'user_name': currentUser,
+            "user_Rank": currentUser.Emp_Rank,})
     else:
         return redirect('login')
     
@@ -182,6 +214,19 @@ def approval(request):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         doc_type = request.GET.get("doc_type")
+
+        if(currentUser.Emp_Rank == 1):
+            currentUser.Emp_Rank = "사원"
+        elif(currentUser.Emp_Rank == 2):
+            currentUser.Emp_Rank = "대리"
+        elif(currentUser.Emp_Rank == 3):
+            currentUser.Emp_Rank = "과장"
+        elif(currentUser.Emp_Rank == 4):
+            currentUser.Emp_Rank = "차장"
+        elif(currentUser.Emp_Rank == 5):
+            currentUser.Emp_Rank = "부장"
+        elif(currentUser.Emp_Rank == 6):
+            currentUser.Emp_Rank = "사장"
 
         if doc_type:
             receiveDoc = receiveDoc.filter(Doc_Type = doc_type)
@@ -209,7 +254,8 @@ def approval(request):
             elif doc.Doc_Type == 7:
                 doc.Doc_Type_String = "보고서"
 
-        return render(request, 'approval_document.html', {'page_obj': page_obj})
+        return render(request, 'approval_document.html', {'page_obj': page_obj, 'user_name': currentUser,
+            "user_Rank": currentUser.Emp_Rank,})
     else:
         return redirect('login')
     
@@ -230,8 +276,22 @@ def viewer(request, Doc_ID):
             'Emp_Name': employee.Emp_Name,
             'Rank': rank_dict.get(employee.Emp_Rank, ""),
         }
+        
         for employee in Employee.objects.all()
     ]
+        
+        if(currentUser.Emp_Rank == 1):
+            currentUser.Emp_Rank = "사원"
+        elif(currentUser.Emp_Rank == 2):
+            currentUser.Emp_Rank = "대리"
+        elif(currentUser.Emp_Rank == 3):
+            currentUser.Emp_Rank = "과장"
+        elif(currentUser.Emp_Rank == 4):
+            currentUser.Emp_Rank = "차장"
+        elif(currentUser.Emp_Rank == 5):
+            currentUser.Emp_Rank = "부장"
+        elif(currentUser.Emp_Rank == 6):
+            currentUser.Emp_Rank = "사장"
         
         current_rank = rank_dict.get(currentUser.Emp_Rank, "")
         document = get_object_or_404(Document.Document, Doc_ID = Doc_ID)
@@ -325,7 +385,8 @@ def viewer(request, Doc_ID):
             check_value = "결재 완료"
 
         print(check_value)
-        return render(request, 'viewer.html', {"Document": document, "Rank": rank, "ReRank": rerank, "Check_value": check_value, 'Doc_Type': doc_type, 'form': form, 'username': employee.Emp_Name, 'employee': employee, 'receiver_Rank': receiver_Rank})
+        return render(request, 'viewer.html', {"Document": document, 'user_name': currentUser,
+            "user_Rank": currentUser.Emp_Rank, "Rank": rank, "ReRank": rerank, "Check_value": check_value, 'Doc_Type': doc_type, 'form': form, 'username': employee.Emp_Name, 'employee': employee, 'receiver_Rank': receiver_Rank})
     
     else:
         return redirect('login')
@@ -389,3 +450,29 @@ def upload_document(request):
             success_page_url = '/testcase/?success_page=true'
             return HttpResponseRedirect(success_page_url)
     return render(request, 'fileupload.html')
+
+def base(request):
+    if(request.user.is_authenticated):
+        currentUser = findUser(request)
+
+        if(currentUser.Emp_Rank == 1):
+            currentUser.Emp_Rank = "사원"
+        elif(currentUser.Emp_Rank == 2):
+            currentUser.Emp_Rank = "대리"
+        elif(currentUser.Emp_Rank == 3):
+            currentUser.Emp_Rank = "과장"
+        elif(currentUser.Emp_Rank == 4):
+            currentUser.Emp_Rank = "차장"
+        elif(currentUser.Emp_Rank == 5):
+            currentUser.Emp_Rank = "부장"
+        elif(currentUser.Emp_Rank == 6):
+            currentUser.Emp_Rank = "사장"
+
+
+        return render (request, 'index.html', {
+
+            'user_name': currentUser,
+            "user_Rank": currentUser.Emp_Rank,
+
+        })
+    

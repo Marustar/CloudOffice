@@ -18,7 +18,7 @@
           ><img src="{% static 'img/logo.png' %}" alt="Cloud Office Logo"
         /></a>
       </div>
-      <nav class="header-nav">
+      <nav class="header-menu">
         <ul>
           <li><a href="{% url 'home' %}">메인</a></li>
           <li><a href="{% url 'document' %}">문서 관리</a></li>
@@ -26,6 +26,8 @@
       </nav>
       <div class="header-login">
         {% if user.is_authenticated %}
+        
+        <h4>{{user_name}} {{user_Rank}}</h4>
         <a href="{% url 'logout' %}">로그아웃</a>
         {% else %}
         <a href="{% url 'login' %}">로그인</a>
@@ -38,5 +40,3 @@
     </footer>
   </body>
 </html>
-
-

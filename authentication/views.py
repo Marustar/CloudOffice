@@ -32,7 +32,7 @@ class LoginView(DjangoLoginView):
                     login(request, user)
                     return redirect('authenticated_home')
                 else:
-                    form.add_error(None, '유효하지 않은 닉네임이나 패스워드입니.')
+                    form.add_error(None, '유효하지 않은 닉네임이나 패스워드입니다.')
                     return render(request, 'login.html', {'form': form})
             except:
                 form.add_error(None, '유효하지 않은 닉네임이나 패스워드입니다.')

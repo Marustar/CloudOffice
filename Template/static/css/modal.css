@@ -1,39 +1,129 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #e9ecef; /* 약간의 그레이 색상으로 변경 */
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 form {
-  background-color: #fff;
-  padding: 20px;
+  background-color: #ffffff;
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 80%; /* 전체 화면의 80%를 사용 */
+  box-sizing: border-box; /* Include padding in width calculations */
+  max-width: 100%; /* Prevent potential horizontal scrolling */
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+
+label[for="document-title"],
+label[for="position"],
+label[for="author-name"],
+label[for="receiver-id"],
+label[for="document-content"] {
+  margin-bottom: 0.1px; /* 레이블 간격을 줄임 */
+  /* 나머지 스타일은 이전과 동일하게 유지 */
 }
 
 input[type='text'],
 input[type='date'],
-textarea {
+textarea,
+select {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+/* Adjusted widths for specific input fields */
+#document-title {
+  width: calc(100% - 40px);
+}
+
+#author-name {
+  width: calc(100% - 40px);
+}
+
+#document-content {
+  width: calc(100% - 40px);
+}
+
+#author-name {
+  margin-bottom: 0.1px; /* 입력 요소 간격을 줄임 */
+}
+
+input[type='text']:focus,
+input[type='date']:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+}
+
+input[type='file'] {
+  padding: 10px;
+  background-color: #f7f7f7;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box; /* border 포함 폭 계산 */
+  margin-bottom: 12px;
+
+}
+
+input[type='file']::file-selector-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+input[type='file']::-webkit-file-upload-button {
+  color: white;
+}
+
+input[type='file']::-webkit-file-upload-button:hover {
+  background-color: #0056b3;
 }
 
 input[type='submit'] {
+  width: 100%;
   background-color: #007bff;
   color: white;
   border: none;
   padding: 12px 20px;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  margin-top: 12px;
 }
 
 input[type='submit']:hover {
   background-color: #0056b3;
 }
 
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -49,48 +139,35 @@ input[type='submit']:hover {
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 60%; /* 전체 화면의 60%를 사용 */
 }
 
 .close {
   color: #aaa;
   float: right;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: black;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 select {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   appearance: none;
   background-color: #fff;
-  background-image: linear-gradient(45deg, transparent 50%, #ddd 50%),
-    linear-gradient(135deg, #ddd 50%, transparent 50%);
-  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) 1em;
-  background-size: 5px 5px, 2px 3.5px;
+  background-image: linear-gradient(45deg, transparent 50%, #aaa 50%), linear-gradient(135deg, #aaa 50%, transparent 50%);
+  background-position: calc(100% - 25px) calc(1em + 2px), calc(100% - 20px) 1em;
+  background-size: 5px 5px, 3px 4px;
   background-repeat: no-repeat;
-  cursor: pointer;
-}
-
-select:focus {
-  outline: none;
-  border-color: #007bff;
 }
 
 select option {
-  padding: 8px;
+  padding: 10px;
   background-color: #fff;
   color: #333;
 }
